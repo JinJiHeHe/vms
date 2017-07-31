@@ -6,9 +6,11 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-
 <html>
-  <body>
-   <h2>Hello Niako!</h2>
-  </body>
+<head>
+    <title>HelloTest</title>
+</head>
+<body>
+<h2>Hello Niako!</h2>
+</body>
 </html>
