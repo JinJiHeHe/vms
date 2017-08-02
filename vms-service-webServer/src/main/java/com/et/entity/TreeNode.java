@@ -20,7 +20,7 @@ public class TreeNode {
     //节点是否选中
     private boolean checked = false;
     //子节点
-    private List<TreeNode> children = new ArrayList<TreeNode>();
+     private List<TreeNode> children = new ArrayList<TreeNode>();
 
     public List<TreeNode> getChildren() {
         return children;
