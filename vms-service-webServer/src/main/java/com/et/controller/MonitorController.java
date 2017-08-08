@@ -4,7 +4,6 @@ import com.et.entity.TreeNode;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import  javax.servlet.http.HttpSession;
 import java.util.List;
 
 /**
@@ -12,10 +11,10 @@ import java.util.List;
  */
 @Controller
 @RequestMapping("/monitor")
-public class Monitor {
+public class MonitorController {
 @RequestMapping("/getGroupTree.do")
 @ResponseBody
-public List<TreeNode> getGroupTree(HttpSession session,String groupischecked, String treeStatus){
+public List<TreeNode> getGroupTree(String groupischecked, String treeStatus){
     if (null == treeStatus || "".equals(treeStatus)) {
         treeStatus = "0";
     }
