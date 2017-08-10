@@ -1,4 +1,5 @@
 var groupTree=function(){
+    var isReloadVid = false;
 return {
     init: function () {
      $('#groupTree').tree({
@@ -6,11 +7,11 @@ return {
          checkbox:true,
 
          onBeforeExpand:function(node){//在节点展开之前触发
-             var groupChecked = 'false';
+             var groupischecked = 'false';
              if (node.checked) {//当前节点选中
-                 groupChecked = 'true';
+                 groupischecked = 'true';
              } else {
-                 groupChecked = 'false';
+                 groupischecked = 'false';
              }
              var url = "../monitor/getGroupTree.do";
              $("#groupTree").tree("options").url =url+"?groupischecked="+groupischecked+"?id="+node.id;
@@ -30,7 +31,6 @@ return {
              isReloadVid = false;
          },
          onSelect:function(node){
-            // $('#groupTree').tree('toggle',node.target());
              if (node.state=="closed") {//如果是折叠的则展开
                  $('#groupTree').tree('expand', node.target);
              } else {//如果是展开的则折叠
