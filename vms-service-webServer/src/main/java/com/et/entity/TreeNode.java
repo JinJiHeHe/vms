@@ -19,6 +19,9 @@ public class TreeNode {
     private Object attributes;
     //节点是否选中
     private boolean checked = false;
+    public TreeNode(){
+        this.state="open";
+    }
     //子节点
      private List<TreeNode> children = new ArrayList<TreeNode>();
 

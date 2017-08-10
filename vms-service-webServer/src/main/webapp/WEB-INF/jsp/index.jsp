@@ -23,6 +23,7 @@
     <script type="text/javascript" src="../js/jquery-easyui-1.5.2/jquery.easyui.min.js"></script>
     <link rel="stylesheet" href="../js/jquery-easyui-1.5.2/themes/icon.css" type="text/css">
     <link rel="stylesheet" href="../js/jquery-easyui-1.5.2/themes/default/easyui.css" type="text/css">
+    <script type="text/javascript" src="../js/index.js"></script>
     <title>布局</title>
 </head>
 
@@ -119,7 +120,9 @@
     map.addControl(new BMap.NavigationControl());
     map.enableScrollWheelZoom();   //启用滚轮放大缩小，默认禁用
     map.enableContinuousZoom();    //启用地图惯性拖拽，默认禁用
-
+    jQuery(document).ready(function() {
+        groupTree.init();
+    },100);
 
 </script>
 </body>
