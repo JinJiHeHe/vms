@@ -36,7 +36,11 @@ return {
              } else {//如果是展开的则折叠
                  $('#groupTree').tree('collapse', node.target);
              }
+         },
+         onCheck:function () {
+
          }
+
      });
     },
 };

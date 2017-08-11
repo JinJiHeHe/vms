@@ -1,6 +1,6 @@
-package com.et.service;
+package com.et.web.service;
 
-import com.et.entity.User;
+import com.et.web.entity.User;
 
 /**
  * Created by gaop on 2017/8/7.

@@ -1,6 +1,6 @@
-package com.et.service;
+package com.et.web.service;
 
-import com.et.entity.TreeNode;
+import com.et.web.entity.TreeNode;
 
 import java.util.List;
 

@@ -1,10 +1,10 @@
-package com.et.serviceImpl;
+package com.et.web.serviceImpl;
 
-import com.et.dao.MonitorMapper;
-import com.et.entity.TreeNode;
-import com.et.entity.organization;
-import com.et.entity.vehicleinfo;
-import com.et.service.MonitorService;
+import com.et.web.dao.MonitorMapper;
+import com.et.web.entity.TreeNode;
+import com.et.web.entity.organization;
+import com.et.web.entity.vehicleinfo;
+import com.et.web.service.MonitorService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;

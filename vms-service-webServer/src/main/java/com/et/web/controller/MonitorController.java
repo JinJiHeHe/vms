@@ -1,7 +1,7 @@
-package com.et.controller;
+package com.et.web.controller;
 
-import com.et.entity.TreeNode;
-import com.et.service.MonitorService;
+import com.et.web.entity.TreeNode;
+import com.et.web.service.MonitorService;
 import com.google.gson.Gson;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;

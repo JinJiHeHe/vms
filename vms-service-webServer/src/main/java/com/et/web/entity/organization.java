@@ -1,4 +1,4 @@
-package com.et.entity;
+package com.et.web.entity;
 
 /**
  * Created by gaop on 2017/8/9.

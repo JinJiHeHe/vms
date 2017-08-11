@@ -1,7 +1,7 @@
-package com.et.dao;
+package com.et.web.dao;
 
-import com.et.entity.organization;
-import com.et.entity.vehicleinfo;
+import com.et.web.entity.organization;
+import com.et.web.entity.vehicleinfo;
 import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Repository;
 

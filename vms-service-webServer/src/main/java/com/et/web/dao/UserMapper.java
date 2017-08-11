@@ -1,6 +1,6 @@
-package com.et.dao;
+package com.et.web.dao;
 
-import com.et.entity.User;
+import com.et.web.entity.User;
 import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Repository;
 
@@ -10,5 +10,5 @@ import org.springframework.stereotype.Repository;
 @Repository("userMapper")
 public interface UserMapper {
 @Select("select * from user u where u.username=#{0} and u.password=#{1}")
-public User selectUser(String username,String password);
+public User selectUser(String username, String password);
 }
