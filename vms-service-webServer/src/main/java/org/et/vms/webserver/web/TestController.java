@@ -21,12 +21,7 @@ public class TestController {
     public String testGet(Model model){
 
         System.out.println("request come");
-        return "testget";
-    }
-
-    public String testPost(){
-
-        return "testpost";
+        return "index";
     }
 
 }
