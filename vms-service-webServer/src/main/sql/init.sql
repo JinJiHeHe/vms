@@ -63,9 +63,9 @@ CREATE TABLE organization_info(
     `org_name` CHAR(256) NOT NULL COMMENT '组织机构名称',
     `delete_flag` INT(1) NOT NULL DEFAULT 0 COMMENT '是否删除[0未删除|1删除]',
     `gmt_create` DATETIME NOT NULL DEFAULT sysdate() COMMENT '创建时间',
-    `create_by` CHAR(16) NOT NULL COMMENT '创建人',
+    `author_create` CHAR(16) NOT NULL COMMENT '创建人',
     `gmt_modified` DATETIME COMMENT '修改时间',
-    `modified_by` CHAR(16) COMMENT '修改人',
+    `author_modified` CHAR(16) COMMENT '修改人',
     `is_hidden` INT(1) NOT NULL DEFAULT 0 COMMENT '是否隐藏[不隐藏0|隐藏1]',
     `logtitude` DECIMAL(9,6) NOT NULL COMMENT '经度',
     `latitude` DECIMAL(9,6) NOT NULL COMMENT '纬度'
