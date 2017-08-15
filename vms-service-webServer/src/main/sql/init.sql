@@ -19,6 +19,7 @@ CREATE TABLE user_info(
   KEY idx_org_id(org_id)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT '用户表';
 
+
 #--------车辆信息表--------#
 DROP TABLE IF EXISTS `vehicle_info`;
 CREATE TABLE vehicle_info(

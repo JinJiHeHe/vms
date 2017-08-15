@@ -1,4 +1,4 @@
-package org.et.vms.webserver.web;
+package org.et.vms.webserver.restapi.vehicle.web;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
