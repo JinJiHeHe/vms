@@ -1,7 +1,7 @@
 package com.et.terminalserver.common.netty;
 
-import cn.xhpl.vms.common.cache.ICache;
-import cn.xhpl.vms.common.cache.LocalCacheManager;
+import com.et.terminalserver.common.cache.ICache;
+import com.et.terminalserver.common.cache.LocalCacheManager;
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelOption;
@@ -45,7 +45,7 @@ public class NettyClient {
 	//远程地址
 	private String host;
 	
-	ICache platTable=LocalCacheManager.getCache("vms_xhpl_809_platTable");
+	ICache platTable= LocalCacheManager.getCache("vms_xhpl_809_platTable");
 	
 	public void start() throws InterruptedException {
 

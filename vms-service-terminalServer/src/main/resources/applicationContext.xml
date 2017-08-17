@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <!-- ===================================================↓ 主服务 ↓================================================= -->
+    <bean id="mainServer" class="com.et.terminalserver.terminalaccess.main.TerminalAccessServer">
+        <property name="nettyServer" ref="nettyServer"></property>
+        <property name="busListeners">
+            <map>
+                <entry key="nettyWriter" value-ref="NettyWriterListener"></entry>
+                <entry key=""
+            </map>
+        </property>
+    </bean>
+    <bean id="nettyServer" class="com.et.terminalserver.common.netty.NettyServer">
+        <property name="channelInitializer" ref="terminalChannelIniter"></property>
+    </bean>
+    <bean id="terminalChannelIniter" class="com.et.terminalserver.terminalaccess.netty.TerminalChannelIniter">
+        <property name="nettyHandler" ref="nettyHandler"></property>
+    </bean>
+    <bean id="nettyHandler" class="com.et.terminalserver.terminalaccess.netty.NettyHandler"></bean>
+
+    <!-- ===================================================↓ 各个监听通道 ↓================================================= -->
+     <bean id="NettyWriterListener" class="com.et.terminalserver.terminalaccess.netty.NettyWriterListener">
+         <property name="nettyWriter" ref="nettyHandler"></property>
+     </bean>
+    <bean id=""
+</beans>
