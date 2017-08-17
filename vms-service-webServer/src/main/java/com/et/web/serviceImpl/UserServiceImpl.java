@@ -18,4 +18,9 @@ public class UserServiceImpl implements UserService {
         System.out.println("username: "+username+" password:"+password);
          return userMapper.selectUser(username,password);
     }
+
+    public User getUserByUsername(String username) {
+        System.out.println("shiro username:"+username);
+        return userMapper.getUserByName(username);
+    }
 }
