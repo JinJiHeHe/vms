@@ -11,7 +11,7 @@
     <modules>
         <module>vms-service-webServer</module>
         <module>vms-common</module>
-        <module>vms-service-terminalAccess</module>
+        <module>vms-service-terminalServer</module>
     </modules>
 
     <properties>
