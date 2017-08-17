@@ -127,6 +127,17 @@
 
     <build>
         <finalName>vms-service-webServer</finalName>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>2.3</version>
+                <configuration>
+                    <attachClasses>true</attachClasses><!-- 把class打包jar作为附件 -->
+                    <archiveClasses>true</archiveClasses><!-- 把class打包jar -->
+                </configuration>
+            </plugin>
+        </plugins>
     </build>
 
 </project>
