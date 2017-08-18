@@ -1,6 +1,9 @@
 package com.et.terminalserver.terminalaccess.netty;
 
+import com.et.terminalserver.common.bus.Command;
 import com.et.terminalserver.common.util.conllection.MoreKeyMap;
+import com.et.terminalserver.protocols.business.bo.BusinessObject;
+import com.et.terminalserver.protocols.business.bo.OPOffLine;
 import com.et.terminalserver.protocols.protocols.MessageBody;
 import com.et.terminalserver.protocols.protocols.MessageHeader;
 import com.et.terminalserver.protocols.protocols.ProtocolAnalysis;
@@ -106,14 +109,14 @@ public class NettyHandler implements NettyHandle {
 				info.getChannelState());
 		// 推送离线所用到的对象
 		OPOffLine offLine = new OPOffLine();
-		offLine.setVid(info.getRelationInfo().getVehicleInfo().getVechileId());
+//		offLine.setVid(info.getRelationInfo().getVehicleInfo().getVechileId());
 		offLine.setTerminalKey(info.getTerminalKey());
 		packet.setBusinessObj(offLine);
 		packet.setChannelWapper(info);
 		command.setParam(packet);
 
-		// 发送到业务通道去进行处理
-		BusManager.sendCommand(BusConnectName.BUSINESS, command);
+//		// 发送到业务通道去进行处理
+//		BusManager.sendCommand(BusConnectName.BUSINESS, command);
 	}
 
 	/**
@@ -209,8 +212,8 @@ public class NettyHandler implements NettyHandle {
 			((Packet) command.getParam()).setHoldTime((int) (channelInfo
 					.getOnLineTime() / 1000));
 			((Packet) command.getParam()).setChannelWapper(channelInfo);
-			// 扔到解析组件，飞到decode包
-			BusManager.sendCommand(BusConnectName.DECODER, command);
+//			// 扔到解析组件，飞到decode包
+//			BusManager.sendCommand(BusConnectName.DECODER, command);
 			// }
 		}
 	}

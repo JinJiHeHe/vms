@@ -17,7 +17,7 @@ public class ServerSupport {
 
 	public final static int SERVERSTOP = -1;
 
-	private final static String SERVERNAME = "MainServer";
+	private final static String SERVERNAME = "mainserver";
 	//一次只接收一个指令
 	private final SynchronousQueue<Command> mainTreadQueue = new SynchronousQueue<Command>();
 
