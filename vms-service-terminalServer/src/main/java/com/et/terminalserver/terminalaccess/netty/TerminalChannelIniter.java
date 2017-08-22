@@ -24,6 +24,7 @@ public class TerminalChannelIniter extends NettyChannelIniter {
 		NettySplitPacketChannelHandler split = new NettySplitPacketChannelHandler();
 		split.setNettyHandler(nettyHandler);
 		//先解析绑定一些关系,然后拆包,
+		System.out.println("channelManager1 split2 messageHandler3");
 		ch.pipeline().addLast(group, channelManager, split,
 				new ByteArrayDecoder(), new ByteArrayEncoder(), messageHandler);
 	}

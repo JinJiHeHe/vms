@@ -25,6 +25,7 @@ public class NettyReaderListener extends ChannelHandlerAdapter {
 	public void channelRead(ChannelHandlerContext ctx, Object msg)
 			throws Exception {
 		// netty读取数据的事件被调用了
+		System.out.println("4:nettyReaderListener");
 		handler.read(ctx.channel(), (byte[]) msg);
 	}
 

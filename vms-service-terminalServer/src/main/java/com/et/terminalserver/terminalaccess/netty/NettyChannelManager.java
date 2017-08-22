@@ -35,6 +35,7 @@ public class NettyChannelManager extends ChannelHandlerAdapter {
 		//把buffer内容搞到byte[]里边
 		bf.readBytes(source);
 		//初始化一下channel
+		System.out.println("1:nettyChannelManager"+source);
 		nettyHandler.initChannel(channel, source);
 		super.channelRead(ctx, data);
 	}

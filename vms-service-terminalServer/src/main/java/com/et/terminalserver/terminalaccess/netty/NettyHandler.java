@@ -58,6 +58,7 @@ public class NettyHandler implements NettyHandle {
 			channelMaps.put(key, channelInfo);
 			// 判断该连接的协议类型
 			protocolName = ProtocolAnalysisManager.judegeProtocol(source);
+
 			// 如果该协议不存在，打印日志，忽略数据，关闭连接，原因代码01
 			if (null == protocolName) {
 				log.fatal("IGNORE-01-" + BytesUtil.bytesToHexString(source));
@@ -84,6 +85,7 @@ public class NettyHandler implements NettyHandle {
 			channelMaps.addRelation(key, terminalKey); // <key,<?,channelInfo>>-->>
 			// 保存连接信息终端标识
 			channelInfo.setTerminalKey(terminalKey);
+			System.out.println("2:initchannel protocolname: "+protocolName+" terminalkey:"+terminalKey);
 		}
 	}
 
@@ -198,7 +200,7 @@ public class NettyHandler implements NettyHandle {
 		// 直接获取终端标识
 		String terminalKey = channelInfo.getTerminalKey();
 		// 接入数据的日志
-		log.fatal("ACCEPT-" + terminalKey + "-"
+		System.out.println("5:ACCEPT-" + "protocolname:"+protocolName+" terminalkey:"+terminalKey + "-"
 				+ BytesUtil.bytesToHexString(source));
 		// 根据协议获得解析类
 		ProtocolAnalysis<MessageHeader, MessageBody> analysis = ProtocolAnalysisManager
@@ -226,7 +228,7 @@ public class NettyHandler implements NettyHandle {
 	 * */
 	@Override
 	public void decode(Channel channel, ByteBuf in, List<Object> out) {
-		
+
 		if (channel.remoteAddress() == null)
 			return;
 		// 得到key 地址
@@ -237,6 +239,7 @@ public class NettyHandler implements NettyHandle {
 			ChannelWapper channelInfo = channelMaps.get(key);
 			// 得到协议名
 			String protocolName = channelInfo.getProtocolName();
+			System.out.println("3:decode "+protocolName);
 			// 得到对应协议处理类
 			ProtocolAnalysis<MessageHeader, MessageBody> analysis = ProtocolAnalysisManager
 					.getAnalysis(protocolName);

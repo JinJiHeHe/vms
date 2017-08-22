@@ -1,17 +1,22 @@
 package com.et.terminalserver.terminalaccess.main;
 
+import com.et.terminalserver.common.bus.BusListener;
+import com.et.terminalserver.common.bus.BusManager;
 import com.et.terminalserver.common.netty.NettyServer;
 import com.et.terminalserver.common.server.Server;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
+import java.util.Map;
+import java.util.Set;
 
 public class TerminalAccessServer implements Server {
 
 	// 日志 拿的是log4j2
 	private final static Logger log = LogManager.getLogger(TerminalAccessServer.class);
 
-//	// 通道监听表 <通道名,通道监听类>
-//	private Map<String, BusListener> busListeners;
+	// 通道监听表 <通道名,通道监听类>
+	private Map<String, BusListener> busListeners;
 
 	// Netty socket服务启动类
 	private NettyServer nettyServer;
@@ -24,12 +29,12 @@ public class TerminalAccessServer implements Server {
 	@Override
 	public boolean init(Object param) {
 
-//		// 初始化内部组件监听
-//		Set<String> keys = busListeners.keySet();
-//		for (String key : keys) {
-//			BusManager.createConnect(key);
-//			BusManager.registerListener(key, busListeners.get(key), 8);
-//		}
+		// 初始化内部组件监听
+		Set<String> keys = busListeners.keySet();
+		for (String key : keys) {
+			BusManager.createConnect(key);
+			BusManager.registerListener(key, busListeners.get(key), 8);
+		}
 //		// 初始化redis连接池的连接
 //		if (!redisConsumer.init())
 //			return false;
@@ -40,11 +45,11 @@ public class TerminalAccessServer implements Server {
 	@Override
 	public boolean start(Object param) {
 
-//		// 启动内部组件监听
-//		Set<String> keys = busListeners.keySet();
-//		for (String key : keys) {
-//			BusManager.startConnect(key);
-//		}
+		// 启动内部组件监听
+		Set<String> keys = busListeners.keySet();
+		for (String key : keys) {
+			BusManager.startConnect(key);
+		}
 //
 //		// 启动redis通道监听
 //		for (Map.Entry<String, JedisPubSub> entry : redisListeners.entrySet()) {
@@ -67,11 +72,11 @@ public class TerminalAccessServer implements Server {
 	@Override
 	public boolean stop(Object param) {
 
-//		// 关闭内部组件监听
-//		Set<String> keys = busListeners.keySet();
-//		for (String key : keys) {
-//			BusManager.stopConnect(key);
-//		}
+		// 关闭内部组件监听
+		Set<String> keys = busListeners.keySet();
+		for (String key : keys) {
+			BusManager.stopConnect(key);
+		}
 //		// 关闭redis通道监听
 //		for (Map.Entry<String, JedisPubSub> entry : redisListeners.entrySet()) {
 //			redisConsumer.unsub(entry.getKey());
@@ -84,13 +89,13 @@ public class TerminalAccessServer implements Server {
 		return true;
 	}
 
-//	public Map<String, BusListener> getBusListeners() {
-//		return busListeners;
-//	}
-//
-//	public void setBusListeners(Map<String, BusListener> busListeners) {
-//		this.busListeners = busListeners;
-//	}
+	public Map<String, BusListener> getBusListeners() {
+		return busListeners;
+	}
+
+	public void setBusListeners(Map<String, BusListener> busListeners) {
+		this.busListeners = busListeners;
+	}
 
 	public NettyServer getNettyServer() {
 		return nettyServer;

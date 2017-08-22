@@ -5,18 +5,18 @@
     <!-- ===================================================↓ 主服务 ↓================================================= -->
     <bean id="mainserver" class="com.et.terminalserver.terminalaccess.main.TerminalAccessServer">
         <property name="nettyServer" ref="nettyServer"></property>
-        <!--<property name="busListeners">-->
-            <!--<map>-->
+        <property name="busListeners">
+            <map>
                 <!--<entry key="nettyWriter" value-ref="NettyWriterListener"></entry>-->
                 <!--<entry key="business" value-ref="BusinessListener"></entry>-->
                 <!--<entry key="decoder" value-ref="DecoderListener"></entry>-->
                 <!--<entry key="encoder" value-ref="EncoderListener"></entry>-->
-                <!--<entry key="protoload" value-ref="ProtoLoaderListener"></entry>-->
+                <entry key="protoload" value-ref="ProtoLoaderListener"></entry>
                 <!--<entry key="push2web" value-ref="PushGpsListener"></entry>-->
                 <!--<entry key="push2hbase" value-ref="PushHBaseListener"></entry>-->
                 <!--<entry key="terminalResponse" value-ref="ResponseListener"></entry>-->
-            <!--</map>-->
-        <!--</property>-->
+            </map>
+        </property>
     </bean>
     <bean id="nettyServer" class="com.et.terminalserver.common.netty.NettyServer">
         <property name="port" value="6000"></property>
@@ -40,12 +40,18 @@
     <!--<bean id="DecoderListener" class="com.et.terminalserver.terminalaccess.decode.DecoderListener"></bean>-->
    <!--&lt;!&ndash;编码&ndash;&gt;-->
     <!--<bean id="EncoderListener" class="com.et.terminalserver.terminalaccess.encode.EncoderListener"></bean>-->
-    <!--&lt;!&ndash;协议加载&ndash;&gt;-->
-    <!--<bean id="ProtoLoaderListener" class="com.et.terminalserver.terminalaccess.protoloader.ProtoLoaderListener"></bean>-->
+    <!--协议加载-->
+    <bean id="ProtoLoaderListener" class="com.et.terminalserver.terminalaccess.protoloader.ProtoLoaderListener">
+        <property name="protoLoader" ref="ProtoLoader" />
+    </bean>
      <!--&lt;!&ndash;gps推送到redis，这里需要改一下&ndash;&gt;-->
     <!--<bean id="PushGpsListener" class="com.et.terminalserver.terminalaccess.web.pushgps.PushGpsListener"></bean>-->
      <!--&lt;!&ndash;推送数据到hbase中，这里也需要改一下&ndash;&gt;-->
 <!--<bean id="PushHBaseListener" class="com.et.terminalserver.terminalaccess.hbase.PushHBaseListener"></bean>-->
     <!--&lt;!&ndash;终端响应&ndash;&gt;-->
     <!--<bean id="ResponseListener" class="com.et.terminalserver.terminalaccess.web.response.ResponseListener"></bean>-->
+
+    <!-- ===================================================↓ 各个监听的依赖 ↓================================================= -->
+<bean id="ProtoLoader" class="com.et.terminalserver.terminalaccess.protoloader.ProtocolLoader" init-method="init">
+</bean>
 </beans>
