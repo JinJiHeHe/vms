@@ -3,6 +3,7 @@ package com.et.terminalserver.common.server;
 import com.et.terminalserver.common.bus.BusListener;
 import com.et.terminalserver.common.bus.BusManager;
 import com.et.terminalserver.common.bus.Command;
+import com.et.terminalserver.common.util.ApplicationContextRegister;
 import com.et.terminalserver.common.util.SpringUtil;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -24,7 +25,6 @@ public class ServerSupport {
 	private static boolean activeFlag = false;
 
 	private Server mainServer;
-
 	/**
 	 * @des 初始化
 	 */
@@ -39,18 +39,25 @@ public class ServerSupport {
 //				PropertyConfigurator.configure(System.getProperty("log4j2"));
 //			}
 
-			if (System.getProperty("spring") != null)
-				SpringUtil.init(System.getProperty("spring"));
-			else
-				//激活spring 使配置文件生效
-				SpringUtil.init(null);
+//			if (System.getProperty("spring") != null)
+//				SpringUtil.init(System.getProperty("spring"));
+//			else
+//				//激活spring 使配置文件生效
+//				SpringUtil.init(null);
+			//WebApplicationContext webApplicationContext = ContextLoaderListener.getCurrentWebApplicationContext();
+			mainServer= (Server) ApplicationContextRegister.getApplicationContext().getBean("mainserver");
 
-			if (System.getProperty("mainserver") != null) {
-				mainServer = (Server) SpringUtil.getBean(System.getProperty("mainserver"));
-			} else {
-				mainServer = (Server) SpringUtil.getBean(SERVERNAME);
-			}
+			System.out.println(mainServer);
+			//ApplicationContext context = WebApplicationContextUtils.getWebApplicationContext();
+			//mainServer= (Server) webApplicationContext.getBean("mainserver");
+//			if (System.getProperty("mainserver") != null) {
+//				mainServer = (Server) SpringUtil.getBean(System.getProperty("mainserver"));
+//			} else {
+//			mainServer = (Server) SpringUtil.getBean(SERVERNAME);
+//			}
+			System.out.println(mainServer);
 			if (mainServer.init(params)) {
+
 				log.info("System initializing succeed. ");
 			} else {
 				log.error("System initializing failed. ");
@@ -126,5 +133,13 @@ public class ServerSupport {
 			;
 		}
 		holdProcess();
+	}
+
+	public Server getMainServer() {
+		return mainServer;
+	}
+
+	public void setMainServer(Server mainServer) {
+		this.mainServer = mainServer;
 	}
 }

@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<protocols>
+    <protocol protocolname="T808" protocolclass="com.et.terminalserver.t808.T808_ProtocolAnalysis" />
+</protocols>

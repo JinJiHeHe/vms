@@ -9,9 +9,10 @@ import com.et.terminalserver.protocols.protocols.MessageBody;
 import com.et.terminalserver.protocols.protocols.MessageHeader;
 import com.et.terminalserver.protocols.protocols.ProtocolAnalysis;
 import com.et.terminalserver.protocols.protocols.common.ProtocolAnalysisManager;
+import org.springframework.core.io.Resource;
 
 import java.io.FileNotFoundException;
-import java.io.FileReader;
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -20,22 +21,23 @@ import java.util.List;
  * @Version: 1.0
  * @Date: 2017/8/21 11:35
  */
-public class ProtocolLoader implements ProtoLoad{
+public class ProtocolLoader{
     private XmlParser xmlParser;
     private XmlElement rootElement;
-    private String xmlPath="vms-service-terminalServer/src/main/resources/protocolConfig.xml";
-
-
+    //private String xmlPath="vms-service-terminalServer/src/main/resources/protocolConfig.xml";
+     private Resource resource;
 
     public void init(){
-           loadProtocol(xmlPath);
+           loadProtocol(resource);
     }
 
-    public void loadProtocol(String xmlPath){
+    public void loadProtocol(Resource resource){
         try {
-            xmlParser=new XmlParser(new FileReader(xmlPath));
+            xmlParser=new XmlParser(resource.getInputStream());
 
         } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
             e.printStackTrace();
         }
         try {
@@ -58,25 +60,11 @@ public class ProtocolLoader implements ProtoLoad{
         }
     }
 
-    @Override
-    public void loadProtocolsInDir(String dir) {
-
+    public Resource getResource() {
+        return resource;
     }
 
-    @Override
-    public void loadProtocolByPath(String path) {
-
-    }
-
-    @Override
-    public void dropProtocol(String protocolName) {
-
-    }
-    public String getXmlPath() {
-        return xmlPath;
-    }
-
-    public void setXmlPath(String xmlPath) {
-        this.xmlPath = xmlPath;
+    public void setResource(Resource resource) {
+        this.resource = resource;
     }
 }

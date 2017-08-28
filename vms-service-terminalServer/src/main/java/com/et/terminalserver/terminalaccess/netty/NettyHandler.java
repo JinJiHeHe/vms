@@ -1,5 +1,6 @@
 package com.et.terminalserver.terminalaccess.netty;
 
+import com.et.terminalserver.common.bus.BusManager;
 import com.et.terminalserver.common.bus.Command;
 import com.et.terminalserver.common.util.conllection.MoreKeyMap;
 import com.et.terminalserver.protocols.business.bo.BusinessObject;
@@ -9,6 +10,7 @@ import com.et.terminalserver.protocols.protocols.MessageHeader;
 import com.et.terminalserver.protocols.protocols.ProtocolAnalysis;
 import com.et.terminalserver.protocols.protocols.common.ProtocolAnalysisManager;
 import com.et.terminalserver.protocols.protocols.util.BytesUtil;
+import com.et.terminalserver.terminalaccess.util.BusConnectName;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.Channel;
 import org.apache.commons.logging.Log;
@@ -214,10 +216,11 @@ public class NettyHandler implements NettyHandle {
 			((Packet) command.getParam()).setHoldTime((int) (channelInfo
 					.getOnLineTime() / 1000));
 			((Packet) command.getParam()).setChannelWapper(channelInfo);
-//			// 扔到解析组件，飞到decode包
-//			BusManager.sendCommand(BusConnectName.DECODER, command);
-			// }
-		}
+			// 扔到解析组件，飞到decode包
+			BusManager.sendCommand(BusConnectName.DECODER, command);
+
+			 }
+
 	}
 
 	/**

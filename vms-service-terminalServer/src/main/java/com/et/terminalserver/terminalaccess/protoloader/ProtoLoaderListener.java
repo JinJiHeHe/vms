@@ -13,7 +13,7 @@ import com.et.terminalserver.common.bus.Command;
 public class ProtoLoaderListener implements BusListener {
 
 	//协议加载处理类
-	private ProtoLoad protoLoader;
+	private ProtocolLoader protoLoader;
 
 	/**
 	 * 通道监听接口实现
@@ -30,12 +30,11 @@ public class ProtoLoaderListener implements BusListener {
 
 	}
 
-	public ProtoLoad getProtoLoader() {
+	public ProtocolLoader getProtoLoader() {
 		return protoLoader;
 	}
 
-	public void setProtoLoader(ProtoLoad protoLoader) {
+	public void setProtoLoader(ProtocolLoader protoLoader) {
 		this.protoLoader = protoLoader;
 	}
-
 }

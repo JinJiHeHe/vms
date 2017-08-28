@@ -14,8 +14,7 @@ public class SpringUtil {
 
 	
 	private static FileSystemXmlApplicationContext ctx;
-	private static String PATH = "/vms-service-terminalServer/src/main/resources/applicationContext.xml";
-
+	private static String PATH = "applicationContext1.xml";
 	public static Object getBean(String beanName) {
 
 		return ctx.getBean(beanName);
