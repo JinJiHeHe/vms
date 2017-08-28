@@ -46,7 +46,6 @@ public class ServerSupport {
 //				SpringUtil.init(null);
 			//WebApplicationContext webApplicationContext = ContextLoaderListener.getCurrentWebApplicationContext();
 			mainServer= (Server) ApplicationContextRegister.getApplicationContext().getBean("mainserver");
-
 			System.out.println(mainServer);
 			//ApplicationContext context = WebApplicationContextUtils.getWebApplicationContext();
 			//mainServer= (Server) webApplicationContext.getBean("mainserver");

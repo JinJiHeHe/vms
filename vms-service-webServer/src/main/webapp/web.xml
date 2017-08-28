@@ -41,7 +41,10 @@
     <listener>
 
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
-
+    </listener>
+    <!--启动terminalServer-->
+    <listener>
+        <listener-class>com.et.web.main.MainStartUpServlet</listener-class>
     </listener>
     <!-- spring mvc servlet-->
     <servlet>

@@ -8,9 +8,6 @@
 
     <context:property-placeholder location="classpath:config.properties"/>
     <!-- ===================================================↓ 主服务 ↓================================================= -->
-    <bean id="startUp" class="com.et.terminalserver.terminalaccess.main.MainStartUp"  init-method="startUp" >
-        <property name="applicationConfig" value="applicationContext.xml"></property>
-    </bean>
     <bean id="ServerSupoort" class="com.et.terminalserver.common.server.ServerSupport">
         <property name="mainServer" ref="mainserver"></property>
     </bean>

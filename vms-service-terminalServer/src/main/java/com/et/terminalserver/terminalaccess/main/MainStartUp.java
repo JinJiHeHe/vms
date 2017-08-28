@@ -1,6 +1,8 @@
 package com.et.terminalserver.terminalaccess.main;
 
-import com.et.terminalserver.common.server.ServerSupport;
+import com.et.terminalserver.common.server.MainServerSupport;
+
+import javax.servlet.ServletContext;
 
 /**
 /**
@@ -10,19 +12,14 @@ import com.et.terminalserver.common.server.ServerSupport;
  * @Date: 2017/8/25 10:24
  */
 public class MainStartUp {
-    String applicationConfig;
+    ServletContext servletContext;
+    public MainStartUp(ServletContext servletContext){
+        this.servletContext=servletContext;
+    }
     public void startUp(){
-        String [] param={applicationConfig};
         System.out.println("aaaa");
-           new ServerSupport().process(param);
+           new MainServerSupport().process(servletContext);
            System.out.println("sss");
     }
 
-    public String getApplicationConfig() {
-        return applicationConfig;
-    }
-
-    public void setApplicationConfig(String applicationConfig) {
-        this.applicationConfig = applicationConfig;
-    }
 }
