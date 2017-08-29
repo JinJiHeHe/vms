@@ -8,4 +8,5 @@ import com.et.web.entity.User;
 public interface UserService {
 
     public User getUser(String username,String password);
+    public User getUserByUsername(String username);
 }

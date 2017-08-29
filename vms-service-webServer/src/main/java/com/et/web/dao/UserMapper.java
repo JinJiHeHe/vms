@@ -11,4 +11,6 @@ import org.springframework.stereotype.Repository;
 public interface UserMapper {
 @Select("select * from user u where u.username=#{0} and u.password=#{1}")
 public User selectUser(String username, String password);
+@Select("select * from user u where u.username=#{0}")
+public User getUserByName(String username);
 }

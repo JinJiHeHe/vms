@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <!-- 缓存管理器 -->
+    <bean id="cacheManager" class="org.apache.shiro.cache.ehcache.EhCacheManager">
+        <property name="cacheManagerConfigFile" value="classpath:ehcache-shiro.xml"></property>
+    </bean>
+    <!--自定义的realm-->
+    <bean id="myShiroRealm" class="com.et.web.shiro.MyShiroRealm">
+    </bean>
+    <!-- Shiro Filter -->
+    <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
+        <property name="successUrl" value="/jsp/index.jsp"></property>
+        <property name="securityManager" ref="securityManager"></property>
+        <property name="loginUrl" value="/jsp/login.jsp"></property>
+        <property name="unauthorizedUrl" value="/jsp/unauthorized.jsp"/>
+        <property name="filterChainDefinitions">
+            <value>
+                /index.jsp=anon
+                /jsp/success.jsp=anon
+                /jsp/fail.jsp=anon
+                /jsp/user.jsp = roles[user]
+                /jsp/admin.jsp = roles[admin]
+            </value>
+        </property>
+    </bean>
+<bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
+    <property name="cacheManager" ref="cacheManager"></property>
+    <property name="realm" ref="myShiroRealm"></property>
+</bean>
+    <!-- 配置 Bean 后置处理器: 会自动的调用和 Spring 整合后各个组件的生命周期方法. -->
+    <bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor"/>
+</beans>

@@ -1,7 +1,10 @@
 package com.et.web.controller;
 
-import com.et.web.entity.User;
 import com.et.web.service.UserService;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authc.AuthenticationException;
+import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.subject.Subject;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,15 +21,26 @@ import javax.annotation.Resource;
 public class UserController {
     @Resource
     private UserService userService;
-    @RequestMapping(value="/login.do",method = RequestMethod.POST)
+    @RequestMapping(value="/login.do",method = RequestMethod.GET)
     public String login(String username,String password){
         System.out.println("username: "+username+" password:"+password);
-        User user=userService.getUser(username,password);
-        System.out.println("User:"+user);
-        if(user!=null){
-
-            return "index";
+        Subject subject= SecurityUtils.getSubject();
+        UsernamePasswordToken token=new UsernamePasswordToken(username,password);
+        try {
+            subject.login(token);
         }
-        return "login";
+        catch (AuthenticationException e){
+            e.printStackTrace();
+            return "login";
+        }
+
+        return "index";
+//        User user=userService.getUser(username,password);
+//        System.out.println("User:"+user);
+//        if(user!=null){
+//
+//            return "index";
+//        }
+//        return "login";
     }
 }
