@@ -5,10 +5,12 @@
          xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
     http://www.springframework.org/schema/websocket   http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
          version="3.1">
+
     <context-param>
         <param-name>contextConfigLocation</param-name>
-        <param-value>classpath:spring-*.xml</param-value>
+        <param-value>classpath:spring-*.xml,classpath:applicationContext1.xml</param-value>
     </context-param>
+
     <!-- 编码过滤器 -->
     <filter>
         <filter-name>encodingFilter</filter-name>
@@ -37,8 +39,12 @@
     </filter-mapping>
     <!-- spring监听器 -->
     <listener>
-        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 
+        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+    </listener>
+    <!--启动terminalServer-->
+    <listener>
+        <listener-class>com.et.web.main.MainStartUpServlet</listener-class>
     </listener>
     <!-- spring mvc servlet-->
     <servlet>

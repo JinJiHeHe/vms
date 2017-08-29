@@ -1,6 +1,8 @@
 package com.et.terminalserver.terminalaccess.netty;
 
-import com.et.web.entity.vehicleinfo;
+import com.et.terminalserver.api.model.SimCardInfo;
+import com.et.terminalserver.api.model.TerminalInfo;
+import com.et.terminalserver.api.model.VehicleInfo;
 
 /**
  * @Description 
@@ -12,13 +14,13 @@ import com.et.web.entity.vehicleinfo;
 public class RelationInfo {
 
 	private String terminalKey;
-//	private String vehicleID;
-//	private String terminalID;
-//	private String sinNum;
+	private String vehicleID;
+	private String terminalID;
+	private String sinNum;
 	
-//	private SimCardInfo simInfo;
-//	private TerminalInfo terminalInfo;
-	private vehicleinfo vehicleinfo;
+	private SimCardInfo simInfo;
+	private TerminalInfo terminalInfo;
+	private VehicleInfo vehicleInfo;
 
 	public String getTerminalKey() {
 		return terminalKey;
@@ -28,55 +30,55 @@ public class RelationInfo {
 		this.terminalKey = terminalKey;
 	}
 
-//	public String getVehicleID() {
-//		return vehicleID;
-//	}
-//
-//	public void setVehicleID(String vehicleID) {
-//		this.vehicleID = vehicleID;
-//	}
-//
-//	
-//
-//	public String getTerminalID() {
-//		return terminalID;
-//	}
-//
-//	public void setTerminalID(String terminalID) {
-//		this.terminalID = terminalID;
-//	}
-//
-//	public String getSinNum() {
-//		return sinNum;
-//	}
-//
-//	public void setSinNum(String sinNum) {
-//		this.sinNum = sinNum;
-//	}
+	public String getVehicleID() {
+		return vehicleID;
+	}
 
-//	public SimCardInfo getSimInfo() {
-//		return simInfo;
-//	}
-//
-//	public void setSimInfo(SimCardInfo simInfo) {
-//		this.simInfo = simInfo;
-//	}
-//
-//	public TerminalInfo getTerminalInfo() {
-//		return terminalInfo;
-//	}
-//
-//	public void setTerminalInfo(TerminalInfo terminalInfo) {
-//		this.terminalInfo = terminalInfo;
-//	}
-//
-//	public VehicleInfo getVehicleInfo() {
-//		return vehicleInfo;
-//	}
-//
-//	public void setVehicleInfo(VehicleInfo vehicleInfo) {
-//		this.vehicleInfo = vehicleInfo;
-//	}
+	public void setVehicleID(String vehicleID) {
+		this.vehicleID = vehicleID;
+	}
+
+
+
+	public String getTerminalID() {
+		return terminalID;
+	}
+
+	public void setTerminalID(String terminalID) {
+		this.terminalID = terminalID;
+	}
+
+	public String getSinNum() {
+		return sinNum;
+	}
+
+	public void setSinNum(String sinNum) {
+		this.sinNum = sinNum;
+	}
+
+	public SimCardInfo getSimInfo() {
+		return simInfo;
+	}
+
+	public void setSimInfo(SimCardInfo simInfo) {
+		this.simInfo = simInfo;
+	}
+
+	public TerminalInfo getTerminalInfo() {
+		return terminalInfo;
+	}
+
+	public void setTerminalInfo(TerminalInfo terminalInfo) {
+		this.terminalInfo = terminalInfo;
+	}
+
+	public VehicleInfo getVehicleInfo() {
+		return vehicleInfo;
+	}
+
+	public void setVehicleInfo(VehicleInfo vehicleInfo) {
+		this.vehicleInfo = vehicleInfo;
+	}
 
 	
 }
