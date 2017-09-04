@@ -172,7 +172,7 @@ public class NettyHandler implements NettyHandle {
 			log.warn("Connection is not opened " + terminalKey);
 		} else {
 			channelMaps.get(terminalKey).getChannel().writeAndFlush(data);
-			log.fatal("SENDIT-" + terminalKey + "-"
+			log.info("SENDIT-" + terminalKey + "-"
 					+ BytesUtil.bytesToHexString(data));
 		}
 	}

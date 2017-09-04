@@ -15,7 +15,7 @@
         <property name="nettyServer" ref="nettyServer"></property>
         <property name="busListeners">
             <map>
-                <!--<entry key="nettyWriter" value-ref="NettyWriterListener"></entry>-->
+                <entry key="nettyWriter" value-ref="NettyWriterListener"></entry>
                 <entry key="business" value-ref="BusinessListener"></entry>
                 <entry key="webreceive" value-ref="WebReceiveListener"></entry>
                 <entry key="decoder" value-ref="DecoderListener"></entry>
@@ -38,10 +38,10 @@
     <bean id="nettyHandler" class="com.et.terminalserver.terminalaccess.netty.NettyHandler"></bean>
 
     <!-- ===================================================↓ 各个监听通道 ↓================================================= -->
-    <!--&lt;!&ndash;socket写数据&ndash;&gt;-->
-     <!--<bean id="NettyWriterListener" class="com.et.terminalserver.terminalaccess.netty.NettyWriterListener">-->
-         <!--<property name="nettyWriter" ref="nettyHandler"></property>-->
-     <!--</bean>-->
+    <!--socket写数据-->
+     <bean id="NettyWriterListener" class="com.et.terminalserver.terminalaccess.netty.NettyWriterListener">
+         <property name="nettyWriter" ref="nettyHandler"></property>
+     </bean>
     <!--业务-->
     <bean id="BusinessListener" class="com.et.terminalserver.terminalaccess.business.BusinessListener">
         <property name="business" ref="BusinessHandler" />

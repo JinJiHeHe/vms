@@ -29,14 +29,17 @@ public class MonitorServiceImpl implements MonitorService {
        for (organization org : orgList) {
            TreeNode node = new TreeNode();
            node.setText(org.getOrg_name());
+           node.setId(org.getOrg_id());
            System.out.println(org.getOrg_name());
            List<vehicleinfo> vehicle = monitorMapper.getVehicleByOrg(org.getOrg_id()+"_%");
            List<TreeNode> childNode = new ArrayList<TreeNode>();
            for (vehicleinfo v : vehicle) {
                TreeNode child = new TreeNode();
-               child.setId(v.getOrg_id());
-               child.setText(v.getVehicle_num());
-               System.out.println(v.getVehicle_num());
+               System.out.println("hahahahaha");
+               System.out.println("vehicle_id:"+v.getVehicle_id());
+               child.setId(v.getVehicle_id());
+               child.setText(v.getId_number());
+               System.out.println(v.getId_number());
                childNode.add(child);
            }
            node.setChildren(childNode);
@@ -46,26 +49,27 @@ public class MonitorServiceImpl implements MonitorService {
        list1.add(treeNode);
        return list1;
    }
-    public List<TreeNode> getMonitorTree(String groupischecked,String id) {
+    public List<TreeNode> getMonitorTree(String id) {
        List<TreeNode> list=new ArrayList<TreeNode>();
-        if(id!=null&&id!=""){
-            if(id.equals("1000")){
-                list=getAllTree();
-            }
-            else{
-              List<vehicleinfo> vehicleinfoList=  monitorMapper.getVehicleByOrg(id+"_%");
-
-                   for(vehicleinfo v:vehicleinfoList){
-                       TreeNode child = new TreeNode();
-                       child.setId(v.getOrg_id());
-                       child.setText(v.getVehicle_num());
-                       list.add(child);
-                   }
-            }
-        }
-        else{
-          list=getAllTree();
-        }
+       list=getAllTree();
+//        if(id!=null&&id!=""){
+//            if(id.equals("1000")){
+//                list=getAllTree();
+//            }
+//            else{
+//              List<vehicleinfo> vehicleinfoList=  monitorMapper.getVehicleByOrg(id+"_%");
+//
+//                   for(vehicleinfo v:vehicleinfoList){
+//                       TreeNode child = new TreeNode();
+//                       child.setId(v.getOrg_id());
+//                       child.setText(v.getVehicle_num());
+//                       list.add(child);
+//                   }
+//            }
+//        }
+//        else{
+//          list=getAllTree();
+//        }
          return list;
     }
 }

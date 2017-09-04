@@ -84,19 +84,19 @@
                         <thead>
                         <tr>
                             <th field="ck" checkbox="true"></th>
-                            <th data-options="field:'orgid',width:100">所属单位</th>
-                            <th data-options="field:'vehicleNo',width:100">车号</th>
-                            <th data-options="field:'color',width:100">车牌颜色</th>
-                            <th data-options="field:'time',width:100">时间</th>
-                            <th data-options="field:'warnSpeed',width:100">预警速度</th>
-                            <th data-options="field:'speed',width:100">速度</th>
-                            <th data-options="field:'limitSpeed',width:100">限速(Km/h)</th>
+                            <th data-options="field:'vehicleNumber',width:100,frozenColumns:true">车号</th>
                             <th data-options="field:'state',width:100">车辆状态</th>
-                            <th data-options="field:'direction',width:100">方向</th>
-                            <th data-options="field:'mileage',width:100">当日里程</th>
-                            <th data-options="field:'totalMileage',width:100">累计里程</th>
+                            <th data-options="field:'location',width:100">位置</th>
                             <th data-options="field:'lon',width:100">经度</th>
                             <th data-options="field:'lat',width:100">纬度</th>
+                            <th data-options="field:'gTime',width:100">时间</th>
+                            <th data-options="field:'speed',width:100">速度</th>
+                            <th data-options="field:'sim',width:100">sim卡号</th>
+                            <th data-options="field:'terminalID',width:100">终端号</th>
+                            <th data-options="field:'direction',width:100">方向</th>
+                            <th data-options="field:'mileage',width:100">当日里程</th>
+                            <th data-options="field:'terminalType',width:100">终端类型</th>
+
                         </tr>
                         </thead>
                     </table>

@@ -34,10 +34,10 @@ import java.util.Date;
 
 public class BusinessHandler implements Business {
 
+//	// 报警计算接口
+
 	// 日志
 	private static Log log = LogFactory.getLog(BusinessHandler.class);
-
-//	// 报警计算接口
 //	AlarmCompute alarm;
 
 	// 静态信息接口

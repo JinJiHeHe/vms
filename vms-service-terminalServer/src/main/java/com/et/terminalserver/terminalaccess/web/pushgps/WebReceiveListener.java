@@ -3,6 +3,7 @@ package com.et.terminalserver.terminalaccess.web.pushgps;
 
 import com.et.terminalserver.common.bus.BusListener;
 import com.et.terminalserver.common.bus.Command;
+import com.et.terminalserver.protocols.business.bo.TUGpsInfo;
 
 /**
  * @Description web接收gps点的监听
@@ -21,7 +22,7 @@ public class WebReceiveListener implements BusListener {
 	@Override
 	public void commandReceived(Command command, String connectName) {
 		//pushToRedisHandler.pubToRedis((TUGpsInfo) command.getParam());
-
+         webReceiveHandler.pushGpsToWeb((TUGpsInfo) command.getParam());
 	}
 
 	public WebReceive getWebReceiveHandler() {
