@@ -9,5 +9,5 @@ import java.util.List;
  */
 public interface MonitorService {
     public List<TreeNode> getAllTree();
-    public List<TreeNode> getMonitorTree(String groupischecked,String id);
+    public List<TreeNode> getMonitorTree(String id);
 }

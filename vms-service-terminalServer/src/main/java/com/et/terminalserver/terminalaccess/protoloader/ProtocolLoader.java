@@ -24,7 +24,7 @@ import java.util.List;
 public class ProtocolLoader{
     private XmlParser xmlParser;
     private XmlElement rootElement;
-    //private String xmlPath="vms-service-terminalServer/src/main/resources/protocolConfig.xml";
+    //private String xmlPath="vms-service-terminalServer/src/listener/resources/protocolConfig.xml";
      private Resource resource;
 
     public void init(){

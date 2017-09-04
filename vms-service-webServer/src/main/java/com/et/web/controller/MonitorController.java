@@ -22,9 +22,10 @@ public class MonitorController {
 
     @RequestMapping("/getGroupTree.do")
     @ResponseBody
-    public List<TreeNode> getGroupTree(String groupischecked, String id) {
-        System.out.println("come on...." + "checked:" + groupischecked + " id:" + id);
-        List<TreeNode> list = monitorService.getMonitorTree(groupischecked, id);
+    public List<TreeNode> getGroupTree(String id) {
+        System.out.println("come on...." + "checked:" + " id:" + id);
+        List<TreeNode> list = monitorService.getMonitorTree(id);
+
         for (TreeNode node : list) {
             System.out.println(node.getChildren().get(1).getText());
         }

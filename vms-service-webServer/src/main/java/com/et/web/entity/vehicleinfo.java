@@ -1,54 +1,74 @@
 package com.et.web.entity;
 
-import java.util.Date;
-
 /**
  * Created by gaop on 2017/8/9.
  *
  */
 public class vehicleinfo {
-private int vehicle_id;
-private String vehicle_num;
-private String vehicle_color;
-private String sim_id;
-private String terminal_id;
-private String org_id;
-private int scrapped_flag;
-private String vehicle_type;
-private String terminal_type;
-private Date modify_time;
-private int terminal_interval;
+    /**
+     * 车辆ID
+     */
+  private String vehicle_id; // 关系参照 车辆ID
+    /**
+     * 终端编码
+     */
+   private String terminal_code; // 关系参照 终端编码
+    /**
+     * 组织编号
+     */
+    String org_code; // 组织编号
+    /**
+     * 上传数据类型
+     */
+    int type_id; // 上传数据类型 0:终端接入 1:平台转发
+    /**
+     * 终端ID
+     */
+    String terminal_id; // 终端ID
+    /**
+     * 驾驶员ID
+     */
+    String driverId; // 驾驶员ID
+    /**
+     * 车牌号
+     */
+    String id_number; // 车牌号
 
-    public int getVehicle_id() {
+    /**
+     * 车辆颜色
+     * */
+    String color_id_number_id;
+
+    public String getVehicle_id() {
         return vehicle_id;
     }
 
-    public void setVehicle_id(int vehicle_id) {
+    public void setVehicle_id(String vehicle_id) {
         this.vehicle_id = vehicle_id;
     }
 
-    public String getVehicle_num() {
-        return vehicle_num;
+    public String getTerminal_code() {
+        return terminal_code;
     }
 
-    public void setVehicle_num(String vehicle_num) {
-        this.vehicle_num = vehicle_num;
+    public void setTerminal_code(String terminal_code) {
+        this.terminal_code = terminal_code;
     }
 
-    public String getVehicle_color() {
-        return vehicle_color;
+    public String getOrg_code() {
+        return org_code;
     }
 
-    public void setVehicle_color(String vehicle_color) {
-        this.vehicle_color = vehicle_color;
+    public void setOrg_code(String org_code) {
+        this.org_code = org_code;
     }
 
-    public String getSim_id() {
-        return sim_id;
+    public int getType_id() {
+        return type_id;
     }
 
-    public void setSim_id(String sim_id) {
-        this.sim_id = sim_id;
+    public void setType_id(int type_id) {
+        this.type_id = type_id;
     }
 
     public String getTerminal_id() {
@@ -59,51 +79,28 @@ private int terminal_interval;
         this.terminal_id = terminal_id;
     }
 
-    public String getOrg_id() {
-        return org_id;
+    public String getDriverId() {
+        return driverId;
     }
 
-    public void setOrg_id(String org_id) {
-        this.org_id = org_id;
+    public void setDriverId(String driverId) {
+        this.driverId = driverId;
     }
 
-    public int getScrapped_flag() {
-        return scrapped_flag;
+    public String getId_number() {
+        return id_number;
     }
 
-    public void setScrapped_flag(int scrapped_flag) {
-        this.scrapped_flag = scrapped_flag;
+    public void setId_number(String id_number) {
+        this.id_number = id_number;
     }
 
-    public String getVehicle_type() {
-        return vehicle_type;
+    public String getColor_id_number_id() {
+        return color_id_number_id;
     }
 
-    public void setVehicle_type(String vehicle_type) {
-        this.vehicle_type = vehicle_type;
+    public void setColor_id_number_id(String color_id_number_id) {
+        this.color_id_number_id = color_id_number_id;
     }
 
-    public String getTerminal_type() {
-        return terminal_type;
-    }
-
-    public void setTerminal_type(String terminal_type) {
-        this.terminal_type = terminal_type;
-    }
-
-    public Date getModify_time() {
-        return modify_time;
-    }
-
-    public void setModify_time(Date modify_time) {
-        this.modify_time = modify_time;
-    }
-
-    public int getTerminal_interval() {
-        return terminal_interval;
-    }
-
-    public void setTerminal_interval(int terminal_interval) {
-        this.terminal_interval = terminal_interval;
-    }
 }

@@ -1,3 +1,4 @@
+//组织机构树
 var groupTree=function(){
     var isReloadVid = false;
 return {
@@ -14,7 +15,7 @@ return {
                  groupischecked = 'false';
              }
              var url = "../monitor/getGroupTree.do";
-             $("#groupTree").tree("options").url =url+"?groupischecked="+groupischecked+"?id="+node.id;
+             $("#groupTree").tree("options").url =url+"?attributes="+node.attributes+"?id="+node.id;
              return true;
          },
 
@@ -37,11 +38,24 @@ return {
                  $('#groupTree').tree('collapse', node.target);
              }
          },
-         onCheck:function () {
-
+         onCheck:function (node,checked) {
+             alert("hahha");
+             if(checked) {
+                 var vid = node.id;
+                 alert(vid);
+                 var url = "../map/getPointByVid.do";
+                 $.post(url, {"vid": vid}, function (data) {
+                       alert("hahhahahaha");
+                       alert(data);
+                 });
+             }
          }
 
      });
     },
 };
+}();
+//地图
+var map=function(){
+
 }();

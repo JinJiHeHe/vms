@@ -130,7 +130,7 @@ public class BaseInfoHandler implements BaseInfo {
 
 			// 执行第二个语句
 			String sql_2="select v.vehicle_id,s.sim_id,s.sim_num,t.terminal_code,t.terminal_id,t.ttype_id,v.org_code from v_vehicleinfo v join t_terminalinfo t on v.vehicle_id=t.vehicle_id join  t_siminfo s on s.sim_id=t.sim_id";
-			System.out.println(sql_2);
+			System.out.println("sql_2:"+sql_2);
 			rs = st.executeQuery(sql_2);
 			// 迭代结果 装载对象入缓存
 			while (rs.next()) {
@@ -147,7 +147,7 @@ public class BaseInfoHandler implements BaseInfo {
 					tinfo.setVechileId(rs.getString("VEHICLE_ID"));
 					terminalCache.put(tkey, tinfo);
 
-					log.debug("Loading terminal .................. " + num++ + " " + tinfo.getTerminalCode());
+					log.info("Loading terminal .................. " + num++ + " " + tinfo.getTerminalCode());
 				} catch (Exception e) {
 					log.warn("", e);
 				}
@@ -168,7 +168,7 @@ public class BaseInfoHandler implements BaseInfo {
 					sinfo.setTerminalCode(rs.getString("TERMINAL_CODE"));
 					sinfo.setTerminalId(rs.getString("TERMINAL_ID"));
 					SimCache.put(sinfo.getSimNum(), sinfo);
-					log.debug("Loading simcardNo .................." + num++ + " " + sinfo.getSimNum());
+					log.info("Loading simcardNo .................." + num++ + " " + sinfo.getSimNum());
 				} catch (Exception e) {
 					log.warn("", e);
 				}

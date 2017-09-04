@@ -136,7 +136,7 @@ public class AlarmUtil {
 		return list;
 	}
 
-	// public static void main(String[] args) {
+	// public static void listener(String[] args) {
 	// GpsInfo info = new GpsInfo();
 	// info.setAlarmTag(1073823745);
 	// System.out.println(analysisAlarmTag(info));

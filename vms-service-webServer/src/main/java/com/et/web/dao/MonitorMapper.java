@@ -14,6 +14,6 @@ import java.util.List;
 public interface MonitorMapper {
     @Select("select * from organization o where o.org_id like #{0}")
     public List<organization> getRootNode(String root);
-    @Select("select * from vehicleinfo v where v.org_id like #{0}")
-    public List<vehicleinfo> getVehicleByOrg(String org_id);
+    @Select("select * from v_vehicleinfo v where v.org_code like #{0}")
+    public List<vehicleinfo> getVehicleByOrg(String id);
 }

@@ -18,7 +18,7 @@ import java.util.concurrent.SynchronousQueue;
  * @Version: 1.0
  * @Date: 2017/8/28 9:55
  */
-public class MainServerSupport {
+public class MainServerSupport implements Runnable{
     // 日志
     private final static Logger log = LogManager.getLogger(ServerSupport.class);
 
@@ -36,6 +36,10 @@ public class MainServerSupport {
     /**
      * @des 初始化
      */
+    Object param;
+    public MainServerSupport(Object param){
+        this.param=param;
+    }
     private boolean init(Object params) {
 
         log.info("system initializing ...");
@@ -119,6 +123,19 @@ public class MainServerSupport {
     }
 
     public void process(Object param) {
+
+    }
+
+    public Server getMainServer() {
+        return mainServer;
+    }
+
+    public void setMainServer(Server mainServer) {
+        this.mainServer = mainServer;
+    }
+
+    @Override
+    public void run() {
         final Object params=param;
         if (init(params)) {
             if (start(params)) {
@@ -132,13 +149,5 @@ public class MainServerSupport {
             ;
         }
         holdProcess();
-    }
-
-    public Server getMainServer() {
-        return mainServer;
-    }
-
-    public void setMainServer(Server mainServer) {
-        this.mainServer = mainServer;
     }
 }

@@ -81,8 +81,7 @@ public class T808_ProtocolAnalysis<A extends T808_MessageHeader, B extends T808_
 	@SuppressWarnings("unchecked")
 	@Override
 	public Message<A, B> mapBusinessObject(BusinessObject bo, int opts) {
-              return null;
-		//return (Message<A, B>) mapper.mapper(bo, opts);
+		return (Message<A, B>) mapper.mapper(bo, opts);
 	}
 
 	@Override
