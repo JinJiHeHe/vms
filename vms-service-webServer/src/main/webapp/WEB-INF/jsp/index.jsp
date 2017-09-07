@@ -17,6 +17,9 @@
         .anchorBL{
             display:none;
         }
+        .baidumap{
+            width:100%;height:100%;margin:auto;font-family:"微软雅黑";position:absolute;
+        }
     </style>
     <script src="http://api.map.baidu.com/api?v=2.0&ak=3ifW06URXxsYvbA9btjujrG8OoIb0fPQ" type="text/javascript"></script>
     <script type="text/javascript" src="../js/jquery-easyui-1.5.2/jquery.min.js"></script>
@@ -52,7 +55,9 @@
 </div>
 <div data-options="region:'center',title:'地图监控'"  >
     <div class="easyui-layout" data-options="fit:true" >
-        <div data-options="region:'center'," id="baidumap" ></div>
+        <div data-options="region:'center',fit:true" >
+            <div id="baidumap" class="baidumap"  ></div>
+        </div>
 
     <div data-options="region:'south',title:'监控列表',split:true" style="height:200px;">
 
@@ -79,7 +84,7 @@
                     <a  href="#" class="easyui-linkbutton">清空</a>
                 </div>
                 <div id="datagrid" >
-                    <table class="easyui-datagrid"
+                    <table class="easyui-datagrid" id="vehicleGrid"
                            data-options="url:'',singleSelect:true" >
                         <thead>
                         <tr>
@@ -114,13 +119,8 @@
     </div>
 </div>
 <script type="text/javascript">
-    var map = new BMap.Map("baidumap");          // 创建地图实例
-    var point = new BMap.Point(116.404, 39.915);  // 创建点坐标
-    map.centerAndZoom(point, 12);               // 初始化地图，设置中心点坐标和地图级别
-    map.addControl(new BMap.NavigationControl());
-    map.enableScrollWheelZoom();   //启用滚轮放大缩小，默认禁用
-    map.enableContinuousZoom();    //启用地图惯性拖拽，默认禁用
     jQuery(document).ready(function() {
+        baiduMap.init();
         groupTree.init();
     },100);
 
