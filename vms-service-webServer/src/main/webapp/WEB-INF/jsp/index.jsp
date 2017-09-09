@@ -122,6 +122,8 @@
     jQuery(document).ready(function() {
         baiduMap.init();
         groupTree.init();
+        websockethandler.init();
+
     },100);
 
 </script>

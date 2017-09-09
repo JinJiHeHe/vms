@@ -98,3 +98,23 @@ var baiduMap=function(){
 }
 
 }();
+var websockethandler=function(){
+    return {
+        init: function () {
+            // if (!window.WebSocket) {
+            //     alert("不支持websocket");
+            // }
+            // else alert("支持websocket");
+            var ws = new WebSocket('ws://localhost:8080/vms/webSocketServer');
+            ws.onmessage=function (event) {
+                var data=event.data;
+               // alert(data);
+                var arry = eval("("+data+")");
+               // alert(arry);
+                $("#vehicleGrid").datagrid("loadData",arry);
+                baiduMap.translateSelect(arry);
+            }
+        }
+    }
+}();
+

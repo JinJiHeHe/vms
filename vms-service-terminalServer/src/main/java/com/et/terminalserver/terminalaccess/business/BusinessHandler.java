@@ -20,6 +20,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import java.util.Date;
+import java.util.concurrent.LinkedBlockingQueue;
 
 /**
  * @Project: CNPC_VMS
@@ -48,6 +49,8 @@ public class BusinessHandler implements Business {
 
 	// 车辆上一个点的缓存
 	ICache lastGps = LocalCacheManager.getCache("_lastGps");
+	//把离线和定位信息推到队列里
+    public static LinkedBlockingQueue<Command> pushMonitor=new LinkedBlockingQueue<Command>();
 
 	private static final String CENTERAUTHCODE = "auth_right";
 
@@ -66,7 +69,9 @@ public class BusinessHandler implements Business {
 			command.setCode(BusinessObject.OP_OFFLINE);
 			command.setParam(gpsInfo);
 			// 推送到页面，跳到web.pushgps包里
-			BusManager.sendCommand(BusConnectName.PUSHGPS2WEB, command);
+			//BusManager.sendCommand(BusConnectName.PUSHGPS2WEB, command);
+			pushMonitor.offer(command);
+
 		} else {
 			log.warn("It seems that no gps has receive of vechile "
 					+ offLine.getVid());
@@ -161,9 +166,11 @@ public class BusinessHandler implements Business {
 		push_command.setCode(BusinessObject.TU_RECEIVE_GPS);
 		push_command.setParam(info);
 		// 推送到页面
-		BusManager.sendCommand(BusConnectName.PUSHGPS2WEB, push_command);
+		//BusManager.sendCommand(BusConnectName.PUSHGPS2WEB, push_command);
 		// 推送到hbase
 //		BusManager.sendCommand(BusConnectName.PUSHGPS2HBASE, push_command);
+
+			pushMonitor.offer(push_command);
 
 		// 创建指令
 		Command response_command = new Command();
@@ -171,9 +178,10 @@ public class BusinessHandler implements Business {
 		response_command.setParam(packet);
 		// 推送到响应处理 - encode包
 		BusManager.sendCommand(BusConnectName.ENCODER, response_command);
-
 		// 存入最后一条 gps
 		lastGps.put(info.getVehicleID(), info);
+
+		//
 		return info;
 
 	}

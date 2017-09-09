@@ -129,6 +129,18 @@
             <version>1.0-SNAPSHOT</version>
             <type>jar</type>
         </dependency>
+
+        <!--<dependency>-->
+            <!--<groupId>org.apache.tomcat.embed</groupId>-->
+            <!--<artifactId>tomcat-embed-websocket</artifactId>-->
+            <!--<version>7.0.52</version>-->
+            <!--<scope>provided</scope>-->
+        <!--</dependency>-->
+        <!--<dependency>-->
+            <!--<groupId>org.apache.tomcat.embed</groupId>-->
+            <!--<artifactId>tomcat-embed-core</artifactId>-->
+            <!--<version>7.0.19</version>-->
+        <!--</dependency>-->
     </dependencies>
 
     <build>

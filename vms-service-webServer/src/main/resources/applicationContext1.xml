@@ -17,7 +17,7 @@
             <map>
                 <entry key="nettyWriter" value-ref="NettyWriterListener"></entry>
                 <entry key="business" value-ref="BusinessListener"></entry>
-                <entry key="webreceive" value-ref="WebReceiveListener"></entry>
+                <!--<entry key="webreceive" value-ref="WebReceiveListener"></entry>-->
                 <entry key="decoder" value-ref="DecoderListener"></entry>
                 <entry key="encoder" value-ref="EncoderListener"></entry>
                 <entry key="protoload" value-ref="ProtoLoaderListener"></entry>
@@ -46,9 +46,9 @@
     <bean id="BusinessListener" class="com.et.terminalserver.terminalaccess.business.BusinessListener">
         <property name="business" ref="BusinessHandler" />
     </bean>
-    <bean id="WebReceiveListener" class="com.et.terminalserver.terminalaccess.web.pushgps.WebReceiveListener">
-        <property name="webReceiveHandler" ref="WebReceiveHandler"></property>
-    </bean>
+    <!--<bean id="WebReceiveListener" class="com.et.terminalserver.terminalaccess.web.pushgps.WebReceiveListener">-->
+        <!--<property name="webReceiveHandler" ref="WebReceiveHandler"></property>-->
+    <!--</bean>-->
     <!--解码-->
     <bean id="DecoderListener" class="com.et.terminalserver.terminalaccess.decode.DecoderListener">
         <property name="decoder" ref="Decoder"></property>
@@ -85,9 +85,9 @@
              <property name="name" value="${jdbc.username}"></property>
              <property name="password" value="${jdbc.password}"></property>
          </bean>
-    <bean id="WebReceiveHandler" class="com.et.terminalserver.terminalaccess.web.pushgps.WebreceiveHandler"></bean>
+    <!--<bean id="WebReceiveHandler" class="com.et.terminalserver.terminalaccess.web.pushgps.WebreceiveHandler"></bean>-->
 
-    <bean id="BusinessHandler" class="com.et.terminalserver.terminalaccess.business.BusinessHandler">
+    <bean id="BusinessHandler" class="com.et.terminalserver.terminalaccess.business.BusinessHandler" >
         <!--<property name="alarm" ref="AlarmComputeHandler" />-->
         <property name="baseinfo" ref="BaseInfoHandler" />
         <property name="gis" ref="GisComputeClient" />

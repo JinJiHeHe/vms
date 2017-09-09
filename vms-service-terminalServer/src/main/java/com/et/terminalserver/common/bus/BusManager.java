@@ -19,7 +19,7 @@ public class BusManager {
 
 	final static private Log log = LogFactory.getLog(BusManager.class);
 	// 这里绑定通道名称和监听器
-	private static ConcurrentHashMap<String, BusConnect> busTables = new ConcurrentHashMap<String, BusConnect>();
+	public static ConcurrentHashMap<String, BusConnect> busTables = new ConcurrentHashMap<String, BusConnect>();
 
 	private static int syncTimeout = 3000;
 
@@ -70,7 +70,7 @@ public class BusManager {
 
 	/**
 	 * @Description 创建通道
-	 * 
+	 *
 	 * @param cnnectName
 	 *            所创建的通道名称
 	 */
@@ -78,6 +78,7 @@ public class BusManager {
 		BusConnect connect = new BusConnect();
 		connect.setConnectName(connectName);
 		busTables.put(connectName, connect);
+
 	}
 
 	public static void startConnect(String connectName) {

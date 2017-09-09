@@ -16,6 +16,7 @@ import java.util.List;
 @Controller
 @RequestMapping("/monitor")
 public class MonitorController {
+
     Gson gson = new Gson();
     @Resource
     private MonitorService monitorService;
@@ -24,6 +25,7 @@ public class MonitorController {
     @ResponseBody
     public List<TreeNode> getGroupTree(String id) {
         System.out.println("come on...." + "checked:" + " id:" + id);
+
         List<TreeNode> list = monitorService.getMonitorTree(id);
 
         for (TreeNode node : list) {
