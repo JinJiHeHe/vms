@@ -1,8 +1,6 @@
 package com.et.web.entity;
 
 
-import java.util.Date;
-
 /**
  * @Description：
  * @Author：gaop
@@ -18,7 +16,7 @@ public class DataGridGps {
     /**
      * 采集时间
      */
-    private Date gTime;
+    private String gTime;
     /**
      * 经度
      */
@@ -74,11 +72,11 @@ public class DataGridGps {
     }
 
 
-    public Date getgTime() {
+    public String getgTime() {
         return gTime;
     }
 
-    public void setgTime(Date gTime) {
+    public void setgTime(String gTime) {
         this.gTime = gTime;
     }
 

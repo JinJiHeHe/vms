@@ -39,14 +39,17 @@ return {
              }
          },
          onCheck:function (node,checked) {
-             alert("hahha");
+             //alert("hahha");
              if(checked) {
                  var vid = node.id;
-                 alert(vid);
+                // alert(vid);
                  var url = "../map/getPointByVid.do";
                  $.post(url, {"vid": vid}, function (data) {
-                       alert("hahhahahaha");
-                       alert(data);
+                   //  alert(data);
+                   var arry = eval("("+data+")");
+                  //  alert(arry.rows[0].lon+" "+arry.rows[0].lat);
+                    $("#vehicleGrid").datagrid("loadData",arry);
+                    baiduMap.translateSelect(arry);
                  });
              }
          }
@@ -56,6 +59,62 @@ return {
 };
 }();
 //地图
-var map=function(){
+var baiduMap=function(){
+       var map ;          // 创建地图实例
+      // 创建点坐标
+
+      return{
+    init:function(){
+        map = new BMap.Map("baidumap");
+        var point = new BMap.Point(116.404, 39.915);
+        map.centerAndZoom(point, 12);               // 初始化地图，设置中心点坐标和地图级别
+        map.addControl(new BMap.NavigationControl());
+        map.enableScrollWheelZoom();   //启用滚轮放大缩小，默认禁用
+        map.enableContinuousZoom();    //启用地图惯性拖拽，默认禁用
+
+    },
+
+
+    translateSelect:function (arry) {
+       var lon=arry.rows[0].lon;
+       var lat=arry.rows[0].lat;
+       // alert(lon);
+        var convertor=new BMap.Convertor();
+
+
+        var gpsPoint = new BMap.Point(lon,lat);
+        var pointArr = [];
+        pointArr.push(gpsPoint);
+        convertor.translate(pointArr,1,5,function(data){
+            //alert(data.points[0]);
+            var point=data.points[0];
+            var myIcon = new BMap.Icon("http://lbsyun.baidu.com/jsdemo/img/fox.gif",new BMap.Size(200,157));
+            var marker2 = new BMap.Marker(point,{icon:myIcon});  // 创建标注
+            map.addOverlay(marker2);
+            map.centerAndZoom(point, 12);
+
+        });     //原始经纬度转成百度坐标
+    }
+}
 
 }();
+var websockethandler=function(){
+    return {
+        init: function () {
+            // if (!window.WebSocket) {
+            //     alert("不支持websocket");
+            // }
+            // else alert("支持websocket");
+            var ws = new WebSocket('ws://localhost:8080/vms/webSocketServer');
+            ws.onmessage=function (event) {
+                var data=event.data;
+               // alert(data);
+                var arry = eval("("+data+")");
+               // alert(arry);
+                $("#vehicleGrid").datagrid("loadData",arry);
+                baiduMap.translateSelect(arry);
+            }
+        }
+    }
+}();
+

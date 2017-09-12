@@ -8,6 +8,8 @@ import com.et.web.entity.DataGrid;
 import com.et.web.entity.DataGridGps;
 import org.springframework.stereotype.Service;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,11 +30,13 @@ public class WebInteractionHandler implements WebInteraction{
         System.out.println("test:"+test.get("test"));
         TUGpsInfo info= (TUGpsInfo) lastGps.get(vid);
         System.out.println("tugpsinfo...."+info);
+        DateFormat format=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
         if(info!=null){
             System.out.println("tugpsinfo is not null "+info.getVehicleNumber());
             DataGridGps dataGridGps = new DataGridGps();
             dataGridGps.setDirection(info.getDirection());
-            dataGridGps.setgTime(info.getgTime());
+            dataGridGps.setgTime(format.format(info.getgTime()));
             dataGridGps.setLat(info.getLat());
             dataGridGps.setLon(info.getLon());
             dataGridGps.setMileage(info.getMileage());
@@ -50,6 +54,7 @@ public class WebInteractionHandler implements WebInteraction{
             list.add(dataGridGps);
             DataGrid dataGrid = new DataGrid();
             dataGrid.setRows(list);
+            dataGrid.setTotal(list.size());
             return dataGrid;
         }
         else return null;
