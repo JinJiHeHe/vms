@@ -36,4 +36,13 @@ public class MapController{
         System.out.println(map);
         return map;
     }
+    @RequestMapping("/deleteVid.do")
+    @ResponseBody
+    public String deleteVid(String vid){
+        if(cache.containsKey(vid)) {
+            cache.remove(vid);
+        }
+        System.out.println("vid is remove.......");
+        return "success";
+    }
 }

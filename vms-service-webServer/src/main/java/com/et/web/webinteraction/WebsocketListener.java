@@ -18,7 +18,6 @@ import java.util.Map;
 public class WebsocketListener implements HandshakeInterceptor{
     public boolean beforeHandshake(ServerHttpRequest serverHttpRequest, ServerHttpResponse serverHttpResponse, WebSocketHandler webSocketHandler, Map<String, Object> map) throws Exception {
         if (serverHttpRequest instanceof ServletServerHttpRequest) {
-            ServletServerHttpRequest servletRequest = (ServletServerHttpRequest) serverHttpRequest;
            System.out.println("vid:"+((ServletServerHttpRequest) serverHttpRequest).getServletRequest().getParameter("vid"));
          //  map.put("vid",);
 //            // 标记用户
