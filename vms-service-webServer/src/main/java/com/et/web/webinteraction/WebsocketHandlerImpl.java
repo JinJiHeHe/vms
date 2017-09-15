@@ -8,6 +8,7 @@ import com.et.terminalserver.common.cache.LocalCache;
 import com.et.terminalserver.common.cache.LocalCacheManager;
 import com.et.terminalserver.protocols.business.bo.TUGpsInfo;
 import com.et.terminalserver.terminalaccess.business.BusinessHandler;
+import com.et.web.baiduMap.GeocodingAddress;
 import com.et.web.entity.DataGrid;
 import com.et.web.entity.DataGridGps;
 import com.google.gson.Gson;
@@ -48,10 +49,14 @@ public class WebsocketHandlerImpl implements WebSocketHandler{
                         TUGpsInfo info= (TUGpsInfo) command.getParam();
                         String vid=info.getVehicleID();
                         System.out.println("handleMessage...."+vid);
+                        String location=info.getLat()+","+info.getLon();
+                        String address= GeocodingAddress.getAddress(location);
                         if(cache.containsKey(vid)){
                             System.out.println("vid..."+vid);
                             DateFormat format=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                                 DataGridGps dataGridGps = new DataGridGps();
+                                dataGridGps.setLocation(address);
+                                dataGridGps.setVehicleID(info.getVehicleID());
                                 dataGridGps.setDirection(info.getDirection());
                                 dataGridGps.setgTime(format.format(info.getgTime()));
                                 dataGridGps.setLat(info.getLat());

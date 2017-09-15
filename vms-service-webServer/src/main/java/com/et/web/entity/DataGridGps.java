@@ -13,6 +13,8 @@ public class DataGridGps {
      */
     private String vehicleID;
 
+    private String location;//位置
+
     /**
      * 采集时间
      */
@@ -71,6 +73,13 @@ public class DataGridGps {
         this.vehicleID = vehicleID;
     }
 
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
 
     public String getgTime() {
         return gTime;
@@ -159,4 +168,5 @@ public class DataGridGps {
     public void setState(String state) {
         this.state = state;
     }
+
 }

@@ -4,6 +4,7 @@ package com.et.web.webinteraction;
 import com.et.terminalserver.common.cache.LocalCache;
 import com.et.terminalserver.common.cache.LocalCacheManager;
 import com.et.terminalserver.protocols.business.bo.TUGpsInfo;
+import com.et.web.baiduMap.GeocodingAddress;
 import com.et.web.entity.DataGrid;
 import com.et.web.entity.DataGridGps;
 import org.springframework.stereotype.Service;
@@ -26,15 +27,18 @@ public class WebInteractionHandler implements WebInteraction{
 
     // 车辆信息的缓存 <vid,车辆信息>
     private LocalCache vehicleCache = LocalCacheManager.getCache("_relation");
-    public DataGrid getGpsByVid(String vid ){
+       public DataGrid getGpsByVid(String vid ){
         System.out.println("test:"+test.get("test"));
         TUGpsInfo info= (TUGpsInfo) lastGps.get(vid);
         System.out.println("tugpsinfo...."+info);
         DateFormat format=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-
+         String location=info.getLat()+","+info.getLon();
+         String address= GeocodingAddress.getAddress(location);
         if(info!=null){
             System.out.println("tugpsinfo is not null "+info.getVehicleNumber());
             DataGridGps dataGridGps = new DataGridGps();
+            dataGridGps.setLocation(address);
+            dataGridGps.setVehicleID(info.getVehicleID());
             dataGridGps.setDirection(info.getDirection());
             dataGridGps.setgTime(format.format(info.getgTime()));
             dataGridGps.setLat(info.getLat());
