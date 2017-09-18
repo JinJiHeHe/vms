@@ -9,6 +9,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
 
@@ -22,7 +23,7 @@ public class UserController {
     @Resource
     private UserService userService;
     @RequestMapping(value="/login.do",method = RequestMethod.GET)
-    public String login(String username,String password){
+    public ModelAndView login(String username,String password){
         System.out.println("username: "+username+" password:"+password);
         Subject subject= SecurityUtils.getSubject();
         UsernamePasswordToken token=new UsernamePasswordToken(username,password);
@@ -31,10 +32,11 @@ public class UserController {
         }
         catch (AuthenticationException e){
             e.printStackTrace();
-            return "login";
+            ModelAndView mv=new ModelAndView("redirect:/jsp/login.jsp");
+            return mv;
         }
-
-        return "index";
+        ModelAndView mv=new ModelAndView("redirect:/jsp/index.jsp");
+        return mv;
 //        User user=userService.getUser(username,password);
 //        System.out.println("User:"+user);
 //        if(user!=null){

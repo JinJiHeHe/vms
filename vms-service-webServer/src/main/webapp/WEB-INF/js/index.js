@@ -2,6 +2,7 @@
 var groupTree=function(){
     var isReloadVid = false;
     var dataRows={};
+    var dataChecked={};
 return {
     init: function () {
      $('#groupTree').tree({
@@ -42,6 +43,7 @@ return {
          onCheck:function (node,checked) {
              //alert("hahha");
              var vid = node.id;
+
              if(checked) {
 
                  var url = "../map/getPointByVid.do";
@@ -59,7 +61,7 @@ return {
              }
              else{
                      var rowindex=dataRows[vid];
-                    if(rowindex!=null){
+                         if(rowindex!=null){
                         var rows=$("#vehicleGrid").datagrid("getRows");
                         var id_num=rows[rowindex].vehicleNumber;
                         $("#vehicleGrid").datagrid("deleteRow",rowindex);
@@ -75,6 +77,63 @@ return {
      });
     },
 };
+}();
+var datagrid=function(){
+
+return {
+    init:function(){
+              $("#vehicleGrid").datagrid({
+                  rowStyler:function(index,row){
+                      var rows = $("#vehicleGrid").datagrid("getSelections");
+                      if(rows!=null){
+                          return 'background-color:pink;color:blue;font-weight:bold;';
+                      }
+                  },
+                  fit:true,
+                  frozenColumns: [[
+                      {field:'ck',checkbox:true},
+                      {field:'vehicleNumber',title:'车号',width:100},
+                  ]],
+                  columns:[[
+                      {field:'state',title:'车辆状态',width:100},
+                      {field:'location',title:'位置',width:100},
+                      {field:'lon',title:'经度',width:100},
+                      {field:'lat',title:'纬度',width:100},
+                      {field:'gTime',title:'时间',width:100},
+                      {field:'speed',title:'速度',width:100},
+                      {field:'sim',title:'sim卡号',width:100},
+                      {field:'terminalID',title:'终端号',width:100},
+                      {field:'direction',title:'方向',width:100},
+                      {field:'mileage',title:'当日里程',width:100},
+                      {field:'terminalType',title:'终端类型',width:100},
+
+                  ]],
+//                   //全选
+//                   onCheckAll:function() {
+//                       $('#vehicleGrid').datagrid('selectAll');
+//                   },
+//                   //反选
+//                   unselectRow:function() {
+//                       var s_rows = $.map($('#vehicleGrid').datagrid('getSelections'),
+//                           function(n) {
+//                               return $('#vehicleGrid').datagrid('getRowIndex', n);
+//                           });
+//                       $('#vehicleGrid').datagrid('selectAll');
+//                       $.each(s_rows, function(i, n) {
+//                           $('#vehicleGrid').datagrid('unselectRow', n);
+//                       });
+//
+//                   },
+// //全清
+//                   onUncheckAll:function() {
+//                       $('#vehicleGrid').datagrid('clearSelections');
+//                   }
+
+              })
+    },
+
+
+}
 }();
 //地图
 var baiduMap=function(){
@@ -152,6 +211,9 @@ var websockethandler=function(){
                 var arry = eval("("+data+")");
                 var arry1=baiduMap.translateSelect(arry);
                 $("#vehicleGrid").datagrid("loadData",arry1);
+            }
+            ws.onclose=function(event){
+                ws=new WebSocket('ws://localhost:8080/vms/webSocketServer');
             }
         }
     }

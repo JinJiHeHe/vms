@@ -33,16 +33,19 @@ public class GeocodingAddress {
         list.add(new BasicNameValuePair("output","xml"));
         list.add(new BasicNameValuePair("pois","0"));
         String response=HttpRequestUtils.httpGet(url,list);
-        System.out.println(response);
+        //System.out.println(response);
 
 
         String formatted_address="";
+
         try {
             InputStream in=new ByteArrayInputStream(response.getBytes("utf-8"));
             XmlParser xmlParser=new XmlParser(in);
             XmlElement element= xmlParser.parse();
             formatted_address  = element.getChildElement("result").getProperty("formatted_address");
-            System.out.println(formatted_address);
+            String sematic_description=element.getChildElement("result").getProperty("sematic_description");
+            formatted_address=formatted_address+sematic_description;
+            // System.out.println(formatted_address);
         } catch (XmlException e) {
             e.printStackTrace();
         } catch (UnsupportedEncodingException e) {
