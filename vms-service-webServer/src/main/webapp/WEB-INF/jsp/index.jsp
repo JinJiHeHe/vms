@@ -83,28 +83,7 @@
                     <a  href="#" class="easyui-linkbutton">查询</a>
                     <a  href="#" class="easyui-linkbutton">清空</a>
                 </div>
-                <div id="datagrid" >
-                    <table class="easyui-datagrid" id="vehicleGrid"
-                           data-options="url:'',singleSelect:true" >
-                        <thead>
-                        <tr>
-                            <th field="ck" checkbox="true"></th>
-                            <th data-options="field:'vehicleNumber',width:100,frozenColumns:true">车号</th>
-                            <th data-options="field:'state',width:100">车辆状态</th>
-                            <th data-options="field:'location',width:100">位置</th>
-                            <th data-options="field:'lon',width:100">经度</th>
-                            <th data-options="field:'lat',width:100">纬度</th>
-                            <th data-options="field:'gTime',width:100">时间</th>
-                            <th data-options="field:'speed',width:100">速度</th>
-                            <th data-options="field:'sim',width:100">sim卡号</th>
-                            <th data-options="field:'terminalID',width:100">终端号</th>
-                            <th data-options="field:'direction',width:100">方向</th>
-                            <th data-options="field:'mileage',width:100">当日里程</th>
-                            <th data-options="field:'terminalType',width:100">终端类型</th>
-
-                        </tr>
-                        </thead>
-                    </table>
+                <div id="vehicleGrid">
                 </div>
             </div>
             <div title="实时报警"  style="overflow:auto;padding:20px;display:none;">
@@ -121,6 +100,7 @@
 <script type="text/javascript">
     jQuery(document).ready(function() {
         baiduMap.init();
+        datagrid.init();
         groupTree.init();
         websockethandler.init();
 
