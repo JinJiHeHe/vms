@@ -1,6 +1,10 @@
 package com.et.web.serviceImpl;
 
+import com.et.terminalserver.api.model.VehicleInfo;
+import com.et.terminalserver.common.cache.LocalCache;
+import com.et.terminalserver.common.cache.LocalCacheManager;
 import com.et.web.dao.MonitorMapper;
+import com.et.web.entity.Combobox;
 import com.et.web.entity.TreeNode;
 import com.et.web.entity.organization;
 import com.et.web.entity.vehicleinfo;
@@ -10,12 +14,15 @@ import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * Created by gaop on 2017/8/9.
  */
 @Service("monitorService")
 public class MonitorServiceImpl implements MonitorService {
+    private LocalCache relationCache = LocalCacheManager.getCache("_relation");
     @Resource
     private MonitorMapper monitorMapper;
    public List<TreeNode> getAllTree(){
@@ -23,7 +30,6 @@ public class MonitorServiceImpl implements MonitorService {
        TreeNode treeNode = new TreeNode();
        treeNode.setId("1000");
        treeNode.setText("监控中心");
-       treeNode.setState("open");
        List<TreeNode> list = new ArrayList<TreeNode>();
        List<organization> orgList = monitorMapper.getRootNode("1000_%");
        for (organization org : orgList) {
@@ -72,4 +78,17 @@ public class MonitorServiceImpl implements MonitorService {
 //        }
          return list;
     }
+
+    public List<Combobox> getAllVehicle() {
+      ConcurrentHashMap<Object, Object> map= relationCache.getCacheMap();
+      List<Combobox> list=new ArrayList<Combobox>();
+      for(Map.Entry<Object,Object> entry:map.entrySet()){
+         Combobox box=new Combobox();
+         box.setVid((String) entry.getKey());
+         box.setId_num(((VehicleInfo)entry.getValue()).getPlate());
+         list.add(box);
+      }
+        return list;
+    }
+
 }

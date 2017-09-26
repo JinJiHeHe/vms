@@ -1,5 +1,6 @@
 package com.et.web.controller;
 
+import com.et.web.entity.Combobox;
 import com.et.web.entity.TreeNode;
 import com.et.web.service.MonitorService;
 import com.google.gson.Gson;
@@ -33,5 +34,12 @@ public class MonitorController {
         }
         // String json= gson.toJson(list);
         return list;
+    }
+    @RequestMapping(value = "/getVehicleList.do", produces="text/html;charset=UTF-8")
+    @ResponseBody
+    public String getAllVehicle(){
+        List<Combobox> box=monitorService.getAllVehicle();
+           String json=gson.toJson(box);
+           return json;
     }
 }
