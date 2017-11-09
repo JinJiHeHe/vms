@@ -99,7 +99,7 @@
         </dependency>
         <dependency>
             <groupId>com.google.guava</groupId>
-            <artifactId>guave</artifactId>
+            <artifactId>guava</artifactId>
             <version>17.0</version>
         </dependency>
 
