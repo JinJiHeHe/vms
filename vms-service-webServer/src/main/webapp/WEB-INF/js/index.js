@@ -132,22 +132,6 @@ var searchBox=function(){
                     $('#groupTree').tree('check', node.target);
                 },
 
-            //     onShowPanel:function(){
-            //         // $('#easyui-searchBox').next(".combo").hide();
-            //        var text= $("#searchBox").combobox("getText");
-            //        var value=$("#searchBox").combobox("getValue");
-            //        var data=$("#searchBox").combobox("getData");
-            //        var arry={};
-            //        arry["vid"]=value;
-            //        arry["id_num"]=text;
-            //         alert(data);
-            //         console.log(data[1]);
-            //         if(text!=""||text!=null){
-            //             if(data.indexOf(arry)>0){
-            //                 $("#searchBox").combobox("clear");
-            // };
-            //         }
-            //     }
 
             });
         }

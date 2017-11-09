@@ -3,6 +3,8 @@ package com.et.web.controller;
 import com.et.terminalserver.common.cache.LocalCache;
 import com.et.terminalserver.common.cache.LocalCacheManager;
 import com.et.web.entity.DataGrid;
+import com.et.web.entity.HistoryGps;
+import com.et.web.service.MapService;
 import com.et.web.webinteraction.WebInteraction;
 import com.google.gson.Gson;
 import org.springframework.stereotype.Controller;
@@ -10,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * Created by gaop on 2017/8/28.
@@ -22,6 +25,8 @@ public class MapController{
     Gson gson=new Gson();
     @Resource
     private WebInteraction webInteraction;
+    @Resource
+    private MapService mapService;
     @RequestMapping(value = "/getPointByVid.do", produces="text/html;charset=UTF-8")
     @ResponseBody
     public String getGpsByVid(String vid){
@@ -44,5 +49,13 @@ public class MapController{
         }
         System.out.println("vid is remove.......");
         return "success";
+    }
+    @RequestMapping(value="/getHistory.do",produces="text/html;charset=UTF-8")
+    @ResponseBody
+    public String getHistory(String id_num,String start_time,String end_time){
+        System.out.println("id_num:"+id_num+" start_time:"+start_time+" end_time"+end_time);
+         List<HistoryGps> list= mapService.getGpsHistory(id_num,start_time,end_time);
+        String  str=gson.toJson(list);
+        return str;
     }
 }

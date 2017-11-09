@@ -87,7 +87,7 @@
          </bean>
     <!--<bean id="WebReceiveHandler" class="com.et.terminalserver.terminalaccess.web.pushgps.WebreceiveHandler"></bean>-->
 
-    <bean id="BusinessHandler" class="com.et.terminalserver.terminalaccess.business.BusinessHandler" >
+    <bean id="BusinessHandler" class="com.et.terminalserver.terminalaccess.business.BusinessHandler" init-method="init" >
         <!--<property name="alarm" ref="AlarmComputeHandler" />-->
         <property name="baseinfo" ref="BaseInfoHandler" />
         <property name="gis" ref="GisComputeClient" />

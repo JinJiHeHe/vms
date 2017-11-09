@@ -155,8 +155,7 @@ public class BaseInfoHandler implements BaseInfo {
 
 			num = 0;
 
-			String sql_3 = "SELECT S.ORG_CODE,S.DEPTCODE,S.SIM_ID,S.SIM_NUM,T.TERMINAL_CODE,T.TERMINAL_ID " + "FROM T_SIMINFO S LEFT JOIN T_TERMINALINFO T ON T.SIM_ID=S.SIM_ID "
-					;
+			String sql_3 = "SELECT S.ORG_CODE,S.DEPTCODE,S.SIM_ID,S.SIM_NUM,T.TERMINAL_CODE,T.TERMINAL_ID " + "FROM T_SIMINFO S LEFT JOIN T_TERMINALINFO T ON T.SIM_ID=S.SIM_ID ";
 			rs = st.executeQuery(sql_3);
 			while (rs.next()) {
 				try {

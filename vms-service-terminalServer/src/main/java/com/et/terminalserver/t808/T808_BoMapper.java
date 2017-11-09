@@ -66,7 +66,7 @@ public class T808_BoMapper implements BoMapper {
 			info.setLat(m0200.getMessageBody().getLatitude());
 			info.setLon(m0200.getMessageBody().getLongitude());
 			info.setMileage(m0200.getMessageBody().getMileage());
-			info.setgTime(m0200.getMessageBody().getTime());
+			info.setGTime(m0200.getMessageBody().getTime());
 			info.setSim(m0200.getMessageHeader().getSimNum());
 			info.setTerminalKey(m0200.getMessageHeader().getSimNum());
 			info.setSpeed(m0200.getMessageBody().getSpeed());
@@ -86,7 +86,7 @@ public class T808_BoMapper implements BoMapper {
 			oldinfo.setLat(m0704.getMessageBody().getLatitude());
 			oldinfo.setLon(m0704.getMessageBody().getLongitude());
 			oldinfo.setMileage(m0704.getMessageBody().getMileage());
-			oldinfo.setgTime(m0704.getMessageBody().getTime());
+			oldinfo.setGTime(m0704.getMessageBody().getTime());
 			oldinfo.setSim(m0704.getMessageHeader().getSimNum());
 			oldinfo.setTerminalKey(m0704.getMessageHeader().getSimNum());
 			oldinfo.setSpeed(m0704.getMessageBody().getSpeed());

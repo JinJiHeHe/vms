@@ -3,7 +3,8 @@ var datagrid=function(){
     return {
         init:function(){
             $("#vehicleGrid").datagrid({
-                rowStyler:function(index,row){
+
+            rowStyler:function(index,row){
                     var rows = $("#vehicleGrid").datagrid("getSelections");
                     if(rows!=null){
                         return 'background-color:pink;color:blue;font-weight:bold;';
@@ -28,6 +29,20 @@ var datagrid=function(){
                     {field:'terminalType',title:'终端类型',width:100},
 
                 ]],
+                onRowContextMenu: function(e, rowIndex, rowData){
+                    //alert("...");
+                    if(rowIndex>=0) {
+                        e.preventDefault();//阻止浏览器捕获右键事件
+                        $("#vehicleGrid").datagrid("clearSelections"); //取消所有选中项
+                        $("#vehicleGrid").datagrid("selectRow", rowIndex); //根据索引选中该行
+                        $('#menu').menu('show', {
+                            //显示右键菜单
+                            left: e.pageX,//在鼠标点击处显示菜单
+                            top: e.pageY
+                        });
+                    }
+                }
+
 //                   //全选
 //                   onCheckAll:function() {
 //                       $('#vehicleGrid').datagrid('selectAll');
@@ -102,11 +117,16 @@ var baiduMap=function(){
             convertor.translate(pointArr,1,5,function(data){   //原始经纬度转成百度坐标
 
                 var point=data.points[0];
-                var myIcon = new BMap.Icon("http://lbsyun.baidu.com/jsdemo/img/fox.gif",new BMap.Size(200,157));
+                var myIcon = new BMap.Icon("http://lbsyun.baidu.com/jsdemo/img/car.png",new BMap.Size(200,157));
                 var marker2 = new BMap.Marker(point,{icon:myIcon});  // 创建标注
-                var label=new BMap.Label(id_num);
-                marker2.setLabel(label);
-                marker2.setTitle(id_num);
+                // var label=new BMap.Label(id_num);
+                // label.setStyle({ color : "red", fontSize : "12px" });
+                // marker2.setLabel(label);
+                // marker2.setTitle(id_num);
+
+                // var infoWindow = new BMap.InfoWindow(id_num);  // 创建信息窗口对象
+                // map.openInfoWindow(infoWindow,point); //开启信息窗口
+
                 map.addOverlay(marker2);
                 map.centerAndZoom(point, 12);
                 keyMap[id_num]=id_num;//存到map中
@@ -117,3 +137,18 @@ var baiduMap=function(){
     }
 
 }();
+function addTab(title,url) {
+    if ($('#maintab').tabs('exists', title)){
+        $('#maintab').tabs('select', title);
+    } else {
+        var content = '<iframe id="history1" scrolling="auto" frameborder="0"  src="'+url+'" style="width:100%;height:100%;"></iframe>';
+        $('#maintab').tabs('add',{
+            title:title,
+            content:content,
+            closable:true
+        });
+
+
+    }
+}
+

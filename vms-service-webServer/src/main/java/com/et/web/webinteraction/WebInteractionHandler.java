@@ -40,7 +40,7 @@ public class WebInteractionHandler implements WebInteraction{
             dataGridGps.setLocation(address);
             dataGridGps.setVehicleID(info.getVehicleID());
             dataGridGps.setDirection(info.getDirection());
-            dataGridGps.setgTime(format.format(info.getgTime()));
+            dataGridGps.setgTime(format.format(info.getGTime()));
             dataGridGps.setLat(info.getLat());
             dataGridGps.setLon(info.getLon());
             dataGridGps.setMileage(info.getMileage());

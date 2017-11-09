@@ -33,52 +33,68 @@
     <div class="easyui-layout" data-options="fit:true" >
         <div data-options="region:'center',fit:true" >
 
-            <div id="mainContainer" class="easyui-tabs" data-options="fit:true">
-                <div title="主页" data-options=""
-                     style="padding: 0px;">
-            <div id="baidumap" class="baidumap"  >
+            <div id="maintab" class="easyui-tabs" data-options="fit:true">
+                <div title="主页" style="padding: 0px;">
+
+                    <div class="easyui-layout" data-options="fit:true">
+                        <div data-options="region:'center',border:false">
+                        <div id="baidumap" class="baidumap">
+                        </div>
+
             </div>
+                        <div data-options="region:'south',title:'监控列表',split:true" style="height:200px;">
+
+                            <div id="tt" class="easyui-tabs" data-options="fit:true">
+                                <div title="实时监控" style="padding:20px;display:none;">
+                                    <div id="queryOptions">
+                                        单位: <input class="easyui-textbox" data-options="type:'text'" style="height: 17px;width:100px;" />
+                                        车牌号:<input class="easyui-textbox" data-options="type:'text'" style="height:17px;width:100px;" />
+                                        SIM卡号:<input class="easyui-textbox" data-options="type:'text'" style="height:17px;width:100px;" />
+                                        终端号:<input class="easyui-textbox" data-options="type:'text'" style="height:17px;width:100px;" />
+                                        终端类型:<select id="terminalType" class="easyui-combobox"  style="width:100px">
+                                        <option>部标</option>
+                                        <option>欧亚</option>
+                                        <option>易特</option>
+                                    </select>
+
+                                        在线状态:<select id="state" class="easyui-combobox"  style="width:200px;;width:100px;">
+                                        <option>全部</option>
+                                        <option>行驶中</option>
+                                        <option>离线</option>
+                                        <option>停车</option>
+                                        <option>未曾上线</option>
+                                    </select>
+                                        <a  href="#" class="easyui-linkbutton">查询</a>
+                                        <a  href="#" class="easyui-linkbutton">清空</a>
+                                    </div>
+                                    <div id="vehicleGrid" >
+                                    </div>
+
+
+                                    <div id="menu" class="easyui-menu" style="width: 50px; display: none;">
+                                        <!--放置一个隐藏的菜单Div-->
+                                        <div onclick="addTab('历史轨迹','history.jsp')">历史轨迹</div>
+                                        <div onclick="">删除</div>
+                                        <!--具体的菜单事件请自行添加，跟toolbar的方法是基本一样的-->
+                                        <div onclick="">修改</div>
+                                    </div>
+
+                                </div>
+                                <div title="实时报警"  style="overflow:auto;padding:20px;display:none;">
+
+                                </div>
+                                <div title="巡查督办"  style="padding:20px;display:none;">
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
             </div>
                 </div>
         </div>
 
-        <div data-options="region:'south',title:'监控列表',split:true" style="height:200px;">
 
-            <div id="tt" class="easyui-tabs" data-options="fit:true">
-                <div title="实时监控" style="padding:20px;display:none;">
-                    <div id="queryOptions">
-                        单位: <input class="easyui-textbox" data-options="type:'text'" style="height: 17px;width:100px;" />
-                        车牌号:<input class="easyui-textbox" data-options="type:'text'" style="height:17px;width:100px;" />
-                        SIM卡号:<input class="easyui-textbox" data-options="type:'text'" style="height:17px;width:100px;" />
-                        终端号:<input class="easyui-textbox" data-options="type:'text'" style="height:17px;width:100px;" />
-                        终端类型:<select id="terminalType" class="easyui-combobox"  style="width:100px">
-                        <option>部标</option>
-                        <option>欧亚</option>
-                        <option>易特</option>
-                    </select>
-                        在线状态:<select id="state" class="easyui-combobox"  style="width:200px;;width:100px;">
-                        <option>全部</option>
-                        <option>行驶中</option>
-                        <option>离线</option>
-                        <option>停车</option>
-                        <option>未曾上线</option>
-                    </select>
-                        <a  href="#" class="easyui-linkbutton">查询</a>
-                        <a  href="#" class="easyui-linkbutton">清空</a>
-                    </div>
-                    <div id="vehicleGrid" >
-
-                    </div>
-                </div>
-                <div title="实时报警"  style="overflow:auto;padding:20px;display:none;">
-
-                </div>
-                <div title="巡查督办"  style="padding:20px;display:none;">
-
-                </div>
-            </div>
-
-        </div>
     </div>
 </div>
 <script type="text/javascript">
@@ -86,6 +102,10 @@
         baiduMap.init();
         datagrid.init();
     },100);
+
+
+
+
 </script>
 </body>
 

@@ -8,6 +8,7 @@ import com.et.terminalserver.common.bus.BusManager;
 import com.et.terminalserver.common.bus.Command;
 import com.et.terminalserver.common.cache.ICache;
 import com.et.terminalserver.common.cache.LocalCacheManager;
+import com.et.terminalserver.common.util.DBUtils;
 import com.et.terminalserver.common.util.LngLatUtil;
 import com.et.terminalserver.common.util.LonLat;
 import com.et.terminalserver.protocols.business.bo.*;
@@ -16,9 +17,17 @@ import com.et.terminalserver.terminalaccess.baseinfo.BaseInfo;
 import com.et.terminalserver.terminalaccess.netty.Packet;
 import com.et.terminalserver.terminalaccess.netty.RelationInfo;
 import com.et.terminalserver.terminalaccess.util.BusConnectName;
+import org.apache.commons.dbutils.QueryRunner;
+import org.apache.commons.dbutils.handlers.ScalarHandler;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.concurrent.LinkedBlockingQueue;
 
@@ -51,9 +60,18 @@ public class BusinessHandler implements Business {
 	ICache lastGps = LocalCacheManager.getCache("_lastGps");
 	//把离线和定位信息推到队列里
     public static LinkedBlockingQueue<Command> pushMonitor=new LinkedBlockingQueue<Command>();
-
+	public QueryRunner qr;
 	private static final String CENTERAUTHCODE = "auth_right";
-
+	ThreadLocal<DateFormat> threadLocal=new ThreadLocal<DateFormat>(){
+		@Override
+		protected DateFormat initialValue() {
+			return new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		}
+	};
+      public void init(){
+		  DBUtils dbUtils=new DBUtils();
+		  qr=dbUtils.getRunner();
+	  }
 	/**
 	 * 终端下线
 	 */
@@ -106,7 +124,7 @@ public class BusinessHandler implements Business {
 			info.setDriverId(0);
 		}
 		// 组织机构
-		info.setgCode(vechileInfo.getGcode());
+		info.setGCode(vechileInfo.getGcode());
 		// sim卡
 		info.setSim(simCardInfo.getSimNum());
 		// 终端编号
@@ -152,8 +170,8 @@ public class BusinessHandler implements Business {
 		info.setOnOffLineFlag(packet.getChannelState());
 
 		if (lastGps.containsKey(info.getVehicleID())) {
-			if (((TUGpsInfo) lastGps.get(info.getVehicleID())).getgTime()
-					.getTime() >= info.getgTime().getTime()) {
+ 			if (((TUGpsInfo) lastGps.get(info.getVehicleID())).getGTime()
+					.getTime() >= info.getGTime().getTime()) {
 				// 已接受
 				info.setAcceptState(BusinessObject.S_UNACCEPT);
 				return info;
@@ -180,7 +198,8 @@ public class BusinessHandler implements Business {
 		BusManager.sendCommand(BusConnectName.ENCODER, response_command);
 		// 存入最后一条 gps
 		lastGps.put(info.getVehicleID(), info);
-
+        //入库
+		pushHistory(info);
 		//
 		return info;
 
@@ -388,6 +407,55 @@ public class BusinessHandler implements Business {
 		return passThrough;
 	}
 
+	/**
+	 * gps入库
+	 * @param info
+	 */
+    public void pushHistory(TUGpsInfo info){
+
+		try {
+			String sql="insert into v_gpsinfo values";
+			String str=info.getVehicleID()+","+info.getGCode()+","+"str_to_date('"+threadLocal.get().format(info.getGTime())+"','%Y-%m-%d %H:%i:%s')"+","+info.getLon()+","+info.getLat()+","+info.getAlt()+","+info.getDirection()+","+info.getSpeed()+","+info.getSim()+","+info.getTerminalID()+","+info.getMileage()+","+info.getState()+","+"'"+info.getLocatoinName()+"'"+","+info.getElon()+","+info.getElat()+","+info.getFuel()+","+info.getDriveSpeed()+","+info.getTerminalType()+","+info.getAlarmTag()+","+info.getDriverId()+","+"'"+info.getVehicleNumber()+"'"+","+info.getElevation()+","+info.getUploadType()+","+"str_to_date('"+threadLocal.get().format(info.getServerTime())+"','%Y-%m-%d %H:%i:%s')"+","+info.getOnOffLineFlag()+","+info.getHoldTime();
+			//String str=getStringByMethod(info);
+			sql=sql+"("+str+")";
+			System.out.println("入库sql:"+sql);
+			qr.insert(sql,new ScalarHandler<Long>());
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+	}
+	public String getStringByMethod(TUGpsInfo info) throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+    	Field[] fields=info.getClass().getDeclaredFields();
+           String str="";
+		for(Field f:fields){
+			// 获取属性的名字
+			String name = f.getName();
+			System.out.println("name:"+name);
+			// 将属性的首字符大写，方便构造get，set方法
+			name = name.substring(0, 1).toUpperCase() + name.substring(1);
+			// 获取属性的类型
+			String type = f.getGenericType().toString();
+			if(!name.equals("BusinessCode")) {
+				if (type.equals("class java.util.Date")) {
+					Method m = info.getClass().getMethod("get" + name);
+					Date date = (Date) m.invoke(info);
+					str = str + "," + "to_date('" + threadLocal.get().format(date) + "','" + "yyyy-MM-dd HH24:mi:ss" + "')";
+				} else if (type.equals("class java.lang.Integer")) {
+					Method m = info.getClass().getMethod("get" + name);
+					str = str + "," + "'" + (Integer) m.invoke(info) + "'";
+				} else if (type.equals("class java.lang.String")) {
+					Method m = info.getClass().getMethod("get" + name);
+					str = str + "," + "'" + (String) m.invoke(info) + "'";
+				} else {
+					Method m = info.getClass().getMethod("get" + name);
+					str = str + "," + m.invoke(info);
+				}
+			}
+		}
+		str=str.substring(1);
+		return str;
+	}
 	// @Override
 	// public TUOrder receiveOrder(TUOrder order, Packet packet) {
 	//
@@ -412,5 +480,4 @@ public class BusinessHandler implements Business {
 	// // providerTo809.pub(object);
 	// return null;
 	// }
-
 }

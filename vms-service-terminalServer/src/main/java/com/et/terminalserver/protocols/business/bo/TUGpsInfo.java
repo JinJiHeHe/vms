@@ -109,40 +109,6 @@ public class TUGpsInfo extends BusinessObject {
 
 	
 	private int holdTime;
-	
-	/**
-	 * 终端标识
-	 */
-//	private int acceptState = UNACCEPT;
-
-	public String getStatus() {
-		return status;
-	}
-
-	public void setStatus(String status) {
-		this.status = status;
-	}
-
-	/**
-	 * 应答的对象
-	 */
-//	private int responseCode = NO_RESPONSE;
-
-	public int getOnOffLineFlag() {
-		return onOffLineFlag;
-	}
-
-	public void setOnOffLineFlag(int onOffLineFlag) {
-		this.onOffLineFlag = onOffLineFlag;
-	}
-
-	public void setServerTime(Date date) {
-		this.serverTime = date;
-	}
-
-	public Date getServerTime(Date date) {
-		return this.serverTime;
-	}
 
 	public String getVehicleID() {
 		return vehicleID;
@@ -152,19 +118,19 @@ public class TUGpsInfo extends BusinessObject {
 		this.vehicleID = vehicleID;
 	}
 
-	public String getgCode() {
+	public String getGCode() {
 		return gCode;
 	}
 
-	public void setgCode(String gCode) {
+	public void setGCode(String gCode) {
 		this.gCode = gCode;
 	}
 
-	public Date getgTime() {
+	public Date getGTime() {
 		return gTime;
 	}
 
-	public void setgTime(Date gTime) {
+	public void setGTime(Date gTime) {
 		this.gTime = gTime;
 	}
 
@@ -232,6 +198,14 @@ public class TUGpsInfo extends BusinessObject {
 		this.mileage = mileage;
 	}
 
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
 	public int getState() {
 		return state;
 	}
@@ -240,7 +214,6 @@ public class TUGpsInfo extends BusinessObject {
 		this.state = state;
 	}
 
-	
 	public String getLocatoinName() {
 		return locatoinName;
 	}
@@ -329,14 +302,20 @@ public class TUGpsInfo extends BusinessObject {
 		this.uploadType = uploadType;
 	}
 
-	@Override
-	public int getBusinessCode() {
-		return TU_RECEIVE_GPS;
-	}
-
-
 	public Date getServerTime() {
 		return serverTime;
+	}
+
+	public void setServerTime(Date serverTime) {
+		this.serverTime = serverTime;
+	}
+
+	public int getOnOffLineFlag() {
+		return onOffLineFlag;
+	}
+
+	public void setOnOffLineFlag(int onOffLineFlag) {
+		this.onOffLineFlag = onOffLineFlag;
 	}
 
 	public int getHoldTime() {
@@ -346,7 +325,9 @@ public class TUGpsInfo extends BusinessObject {
 	public void setHoldTime(int holdTime) {
 		this.holdTime = holdTime;
 	}
-	
-	
 
+	@Override
+	public int getBusinessCode() {
+		return TU_RECEIVE_GPS;
+	}
 }
