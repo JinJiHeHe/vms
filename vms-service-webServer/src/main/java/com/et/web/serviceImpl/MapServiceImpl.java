@@ -32,7 +32,7 @@ public class MapServiceImpl implements MapService {
         DateFormat format=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
           for(TUGpsInfo gpsInfo:list){
               HistoryGps historyGps=new HistoryGps();
-              historyGps.setgTime(format.format(gpsInfo.getGTime()));
+              historyGps.setgTime(format.format(gpsInfo.getgTime()));
               historyGps.setSpeed(gpsInfo.getSpeed());
               historyGps.setDirection(gpsInfo.getDirection());
               historyGps.setMileage(gpsInfo.getMileage());
